@@ -1,0 +1,4199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DSDEV Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* DSDEV Design System Variables */
+        :root {
+            /* Base Colors */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            
+            /* DSDEV Orange */
+            --color-orange-50: #fff9ef;
+            --color-orange-100: #fef2db;
+            --color-orange-200: #fde2b4;
+            --color-orange-300: #fbcd87;
+            --color-orange-400: #f9ab4d;
+            --color-orange-500: #f79837;
+            --color-orange-600: #f07c22;
+            --color-orange-700: #d65c10;
+            --color-orange-800: #a84817;
+            --color-orange-900: #883e16;
+            --color-orange-950: #4a1d09;
+            --color-orange-1000: #1b0b03;
+            
+            /* DSDEV Aqua */
+            --color-aqua-50: #edfefd;
+            --color-aqua-100: #bdfffc;
+            --color-aqua-200: #7cfff7;
+            --color-aqua-300: #33faf8;
+            --color-aqua-400: #14cbce;
+            --color-aqua-500: #00a8ad;
+            --color-aqua-600: #008e96;
+            --color-aqua-700: #02696f;
+            --color-aqua-800: #075157;
+            --color-aqua-900: #094549;
+            --color-aqua-950: #00272c;
+            
+            /* DSDEV Gray */
+            --color-gray-50: #f9f9f9;
+            --color-gray-100: #eff0f0;
+            --color-gray-200: #e1e2e3;
+            --color-gray-300: #cccecf;
+            --color-gray-400: #bbbcbe;
+            --color-gray-500: #939598;
+            --color-gray-600: #7d7f82;
+            --color-gray-700: #6a6c6f;
+            --color-gray-800: #5d5f60;
+            --color-gray-900: #515355;
+            --color-gray-950: #333335;
+            
+            /* DSDEV Warm Gray */
+            --color-warm-25: #fdfdfc;
+            --color-warm-1000: #0b0a09;
+            
+            /* Semantic Colors */
+            --color-success-500: #17b26a;
+            --color-error-500: #f04438;
+            --color-error-600: #d92d20;
+            --color-warning-500: #eaaa08;
+            
+            /* Typography */
+            --font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+            
+            /* Shadows */
+            --shadow-xs: 0px 1px 2px rgba(10, 13, 18, 0.05);
+            --shadow-sm: 0px 1px 2px rgba(10, 13, 18, 0.1), 0px 1px 3px rgba(10, 13, 18, 0.1);
+            --shadow-md: 0px 2px 4px -2px rgba(10, 13, 18, 0.06), 0px 4px 6px -1px rgba(10, 13, 18, 0.1);
+            --shadow-lg: 0px 2px 2px -1px rgba(10, 13, 18, 0.04), 0px 4px 6px -2px rgba(10, 13, 18, 0.03), 0px 12px 16px -4px rgba(10, 13, 18, 0.08);
+            --shadow-xl: 0px 3px 3px -1.5px rgba(10, 13, 18, 0.04), 0px 8px 8px -4px rgba(10, 13, 18, 0.03), 0px 20px 24px -4px rgba(10, 13, 18, 0.08);
+            --shadow-2xl: 0px 4px 4px -2px rgba(10, 13, 18, 0.04), 0px 24px 48px -12px rgba(10, 13, 18, 0.18);
+            
+            /* Spacing */
+            --spacing-1: 4px;
+            --spacing-2: 8px;
+            --spacing-3: 12px;
+            --spacing-4: 16px;
+            --spacing-5: 20px;
+            --spacing-6: 24px;
+            --spacing-8: 32px;
+            --spacing-10: 40px;
+            
+            /* Mobile-specific variables */
+            --mobile-header-height: 60px;
+            --mobile-safe-area-padding: env(safe-area-inset-bottom, 20px);
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: var(--color-warm-1000);
+            --bg-secondary: #1a1918;
+            --bg-tertiary: #252322;
+            --text-primary: var(--color-gray-50);
+            --text-secondary: var(--color-gray-300);
+            --text-tertiary: var(--color-gray-400);
+            --border-color: #2a2827;
+            --hover-bg: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(37, 35, 34, 0.4);
+            --dropdown-bg: rgba(26, 25, 24, 0.95);
+            --input-bg: #1f1d1c;
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-primary: var(--color-warm-25);
+            --bg-secondary: var(--color-white);
+            --bg-tertiary: var(--color-gray-50);
+            --text-primary: var(--color-gray-900);
+            --text-secondary: var(--color-gray-700);
+            --text-tertiary: var(--color-gray-600);
+            --border-color: var(--color-gray-200);
+            --hover-bg: rgba(0, 0, 0, 0.02);
+            --card-bg: var(--color-white);
+            --dropdown-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: var(--color-white);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 var(--spacing-4);
+        }
+
+        .search-input {
+            width: 100%;
+            height: 36px;
+            padding: var(--spacing-2) var(--spacing-10) var(--spacing-2) var(--spacing-4);
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-orange-500);
+            box-shadow: 0 0 0 3px rgba(247, 152, 55, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--text-tertiary);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-tertiary);
+            border: none;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .search-clear:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .search-container.has-value .search-icon {
+            display: none;
+        }
+
+        .search-container.has-value .search-clear {
+            display: flex;
+        }
+
+        /* Filters Dropdown Styles */
+        .filter-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 18px;
+            height: 18px;
+            background-color: var(--color-orange-500);
+            color: var(--color-orange-1000);
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+        }
+
+        .filter-group {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-group-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-2) 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .filter-checkbox:hover {
+            color: var(--color-orange-500);
+        }
+
+        .filter-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: var(--spacing-2);
+            accent-color: var(--color-orange-500);
+            cursor: pointer;
+        }
+
+        .filter-checkbox label {
+            cursor: pointer;
+            font-size: 14px;
+            user-select: none;
+            flex: 1;
+        }
+
+        .filter-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-left: var(--spacing-2);
+        }
+
+        .clear-filters-btn {
+            width: 100%;
+            padding: var(--spacing-2);
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: var(--font-family);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: var(--spacing-3);
+        }
+
+        .clear-filters-btn:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        /* No Results State */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--spacing-10) var(--spacing-6);
+            color: var(--text-tertiary);
+        }
+
+        .no-results-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--spacing-4);
+            opacity: 0.3;
+        }
+
+        .no-results h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .no-results p {
+            font-size: 14px;
+            margin-bottom: var(--spacing-4);
+        }
+
+        /* Mobile Responsive Updates */
+        @media (max-width: 768px) {
+            .search-container {
+                display: none; /* Hidden on mobile by default */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                max-width: none;
+                margin: 0;
+                padding: var(--spacing-3) var(--spacing-4);
+                background-color: var(--bg-secondary);
+                border-bottom: 1px solid var(--border-color);
+                z-index: 99;
+            }
+            
+            .search-container.mobile-active {
+                display: block;
+            }
+            
+            .btn-search-mobile {
+                display: flex !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .btn-search-mobile {
+                display: none !important;
+            }
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-3) var(--spacing-6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-4);
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-orange-500);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            flex-shrink: 0;
+        }
+
+        /* Header Controls */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: var(--spacing-2) var(--spacing-4);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            min-height: 36px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--color-orange-500);
+            color: var(--color-orange-1000);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-orange-600);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--hover-bg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-icon {
+            padding: var(--spacing-2);
+            background-color: transparent;
+            color: var(--text-secondary);
+            position: relative;
+            border-radius: 8px;
+            min-width: 36px;
+            min-height: 36px;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .btn-icon.active {
+            color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: var(--spacing-2);
+            min-width: 280px;
+            background-color: var(--dropdown-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 200;
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-section {
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dropdown-section:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-3);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-2) 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            color: var(--color-orange-500);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            width: 36px;
+            height: 20px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background-color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        .toggle-slider {
+            width: 14px;
+            height: 14px;
+            background-color: var(--color-white);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(16px);
+        }
+
+        /* Toggle visibility for project names, camera names, and timestamps */
+        body.hide-project-names .camera-details p:first-of-type {
+            display: none;
+        }
+        body.hide-camera-names .camera-details h3 {
+            display: none;
+        }
+
+        body.hide-timestamps .camera-details p:last-child {
+            display: none;
+        }
+
+        /* Grid Layout Options */
+        .grid-options {
+            display: flex;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+            flex-wrap: wrap;
+        }
+
+        .grid-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 0 0 auto;
+        }
+
+        .grid-option:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .grid-option input[type="radio"] {
+            margin: 0;
+            accent-color: var(--color-orange-500);
+        }
+
+        .grid-option label {
+            font-size: 14px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+            min-height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: var(--spacing-6);
+            overflow-y: auto;
+            background-color: var(--bg-primary);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Camera placeholder image */
+        .camera-placeholder {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Dark theme placeholder */
+        [data-theme="dark"] .camera-placeholder {
+            background-image: url('./images/cameras/placeholder-dark.jpg');
+        }
+
+        /* Light theme placeholder */
+        [data-theme="light"] .camera-placeholder {
+            background-image: url('./images/cameras/placeholder-light.jpg');
+        }
+
+        /* Camera Grid */
+        .camera-grid {
+            display: grid;
+            gap: var(--spacing-5);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .camera-grid.grid-2x2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .camera-grid.grid-3x3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .camera-grid.grid-4x4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .camera-grid.grid-1x1 {
+            grid-template-columns: 1fr;
+        }
+
+        /* Fit to Screen Mode */
+        .content-area.fit-to-screen {
+            padding-bottom: var(--spacing-4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-area.fit-to-screen .camera-grid {
+            flex: 1;
+            margin-bottom: 0;
+            display: grid;
+            height: 100%;
+            min-height: 0;
+            gap: var(--spacing-3);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-2x2 {
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-3x3 {
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-4x4 {
+            grid-template-rows: repeat(4, 1fr);
+        }
+
+        /* Ensure feeds maintain aspect ratio in fit mode */
+        .content-area.fit-to-screen .camera-feed {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        [data-theme="light"] .content-area.fit-to-screen .camera-feed {
+            background-color: #f5f5f5;
+        }
+
+        .content-area.fit-to-screen .camera-video,
+        .content-area.fit-to-screen .camera-media {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .content-area.fit-to-screen .add-camera-card {
+            min-height: 0;
+            height: 100%;
+        }
+
+        .content-area.fit-to-screen .camera-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .camera-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: move;
+            -webkit-touch-callout: none; /* Prevent callout on long-press */
+        }
+
+        .camera-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            border-color: var(--color-orange-500);
+        }
+
+        .camera-card.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            border-radius: 0;
+            cursor: default;
+        }
+
+        /* Hide play button for image-only cameras */
+        .camera-card[data-camera-type="image"] .video-control-btn[data-action="startLiveView"],
+        .camera-card[data-camera-type="image"] .fullscreen-control-btn[data-action="startLiveView"] {
+            display: none;
+        }
+
+        .camera-feed {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1918 0%, #252322 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .camera-feed {
+            background: linear-gradient(135deg, #f9f9f9 0%, #eff0f0 100%);
+        }
+
+        .camera-placeholder {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+        }
+
+        .camera-offline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            color: var(--text-tertiary);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Content */
+        .camera-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: move;
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
+        .camera-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: move;
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
+        .camera-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .camera-loading.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .loading-spinner {
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--color-orange-500);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Video Controls Overlay */
+        .video-controls {
+            position: absolute;
+            top: var(--spacing-3);
+            right: var(--spacing-3);
+            display: flex;
+            gap: var(--spacing-2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .camera-card:hover .video-controls {
+            opacity: 1;
+        }
+
+        /* Show controls on mobile without hover */
+        @media (hover: none) and (pointer: coarse) {
+            .video-controls {
+                opacity: 1;
+            }
+        }
+
+        .camera-card.fullscreen .video-controls {
+            display: none;
+        }
+
+        .video-control-btn {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+        }
+
+        .video-control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .video-control-btn.active {
+            background-color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        /* Camera Remove Button */
+        .camera-remove-btn {
+            position: absolute;
+            top: var(--spacing-2);
+            left: var(--spacing-2);
+            width: 32px;
+            height: 32px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .camera-card:hover .camera-remove-btn {
+            opacity: 1;
+        }
+
+        .camera-remove-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Hide remove button in fullscreen mode to prevent confusion */
+        .camera-card.fullscreen .camera-remove-btn {
+            display: none;
+        }
+
+        /* Add Camera Button */
+        .add-camera-card {
+            background-color: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 200px;
+            color: var(--text-tertiary);
+        }
+
+        .add-camera-card:hover {
+            border-color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+            color: var(--color-orange-500);
+            transform: translateY(-2px);
+        }
+
+        .add-camera-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .add-camera-card:hover .add-camera-icon {
+            background-color: rgba(247, 152, 55, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* Camera Selection Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: var(--spacing-4);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .camera-selection-modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-2xl);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.active .camera-selection-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: var(--spacing-6);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .modal-close:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .modal-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .projects-sidebar {
+            width: 240px;
+            background-color: var(--bg-tertiary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .project-item {
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .project-item.active {
+            background-color: rgba(247, 152, 55, 0.1);
+            border-right: 3px solid var(--color-orange-500);
+            color: var(--color-orange-500);
+        }
+
+        .project-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .project-cameras-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .cameras-grid-container {
+            flex: 1;
+            padding: var(--spacing-6);
+            overflow-y: auto;
+            min-width: 0;
+        }
+
+        .cameras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+        }
+
+        .camera-option {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .camera-option:hover {
+            border-color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+        }
+
+        .camera-option.selected {
+            border-color: var(--color-orange-500);
+            background-color: rgba(247, 152, 55, 0.1);
+        }
+
+        .camera-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: var(--bg-tertiary);
+        }
+
+        .camera-option.disabled:hover {
+            border-color: var(--border-color);
+            background-color: var(--bg-tertiary);
+        }
+
+        .camera-option-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-2);
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .camera-option.selected .camera-option-icon {
+            background-color: rgba(247, 152, 55, 0.2);
+            color: var(--color-orange-500);
+        }
+
+        .camera-option-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .camera-option-status {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .camera-option.disabled .camera-option-name,
+        .camera-option.disabled .camera-option-status {
+            color: var(--text-tertiary);
+        }
+
+        .modal-footer {
+            padding: var(--spacing-6);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-3);
+            flex-shrink: 0;
+        }
+
+        /* Fullscreen Controls */
+        .fullscreen-controls {
+            position: absolute;
+            top: var(--spacing-6);
+            right: var(--spacing-6);
+            display: none;
+            gap: var(--spacing-3);
+            z-index: 1001;
+        }
+
+        .camera-card.fullscreen .fullscreen-controls {
+            display: flex;
+        }
+
+        .fullscreen-control-btn {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+        }
+
+        .fullscreen-control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .camera-card.fullscreen .camera-feed {
+            aspect-ratio: unset;
+            height: 100vh;
+        }
+
+        .camera-card.fullscreen .camera-overlay {
+            padding: var(--spacing-6);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, transparent 100%);
+        }
+
+        .camera-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-4);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            color: var(--color-white);
+            transition: opacity 0.3s ease;
+        }
+
+        .camera-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .camera-details h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .camera-details h3 .status-indicator {
+            display: inline-block;
+            margin: 0;
+        }
+
+        .camera-details p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+
+        .camera-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--spacing-2);
+            font-size: 13px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-success-500);
+            box-shadow: 0 0 0 2px rgba(23, 178, 106, 0.2);
+        }
+
+        .status-indicator.offline {
+            background-color: var(--color-error-500);
+            box-shadow: 0 0 0 2px rgba(240, 68, 56, 0.2);
+        }
+
+        .battery-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .battery-bar {
+            width: 32px;
+            height: 14px;
+            border: 1.5px solid currentColor;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .battery-level {
+            position: absolute;
+            top: 1.5px;
+            left: 1.5px;
+            bottom: 1.5px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .battery-cap {
+            position: absolute;
+            right: -3px;
+            top: 4px;
+            width: 2px;
+            height: 6px;
+            background-color: currentColor;
+            border-radius: 0 1px 1px 0;
+            z-index: 1;
+        }
+
+        /* Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-lg {
+            width: 48px;
+            height: 48px;
+            stroke-width: 1.5;
+        }
+
+        /* Mobile text shortening for buttons */
+        .btn-text {
+            display: inline;
+        }
+
+        /* Responsive - Tablet */
+        @media (max-width: 1024px) {
+            .camera-grid.grid-2x2,
+            .camera-grid.grid-3x3,
+            .camera-grid.grid-4x4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Adjust fit-to-screen for tablet */
+            .content-area.fit-to-screen .camera-grid.grid-2x2,
+            .content-area.fit-to-screen .camera-grid.grid-3x3,
+            .content-area.fit-to-screen .camera-grid.grid-4x4 {
+                grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Responsive - Mobile (768px and below) */
+        @media (max-width: 768px) {
+            :root {
+                --mobile-header-height: 64px;
+            }
+            
+            .header {
+                padding: var(--spacing-2) var(--spacing-4);
+                position: fixed;
+                width: 100%;
+                height: var(--mobile-header-height);
+            }
+            
+            .header-content {
+                gap: var(--spacing-2);
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .header-controls {
+                gap: var(--spacing-2);
+            }
+            
+            .main-container {
+                padding-top: var(--mobile-header-height);
+                height: 100vh;
+                min-height: 100vh;
+            }
+            
+            .content-area {
+                padding: var(--spacing-4);
+                height: calc(100vh - var(--mobile-header-height));
+                padding-bottom: calc(var(--spacing-4) + var(--mobile-safe-area-padding));
+            }
+            
+            .camera-grid {
+                grid-template-columns: 1fr !important;
+                gap: var(--spacing-4);
+            }
+            
+            /* Disable fit-to-screen on mobile for better UX */
+            .content-area.fit-to-screen {
+                display: block;
+            }
+            
+            .content-area.fit-to-screen .camera-grid {
+                height: auto;
+                grid-template-rows: none;
+            }
+            
+            .content-area.fit-to-screen .camera-feed {
+                aspect-ratio: 16/9;
+                height: auto;
+            }
+            
+            .content-area.fit-to-screen .camera-video,
+            .content-area.fit-to-screen .camera-media {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            /* Mobile Modal */
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+            
+            .camera-selection-modal {
+                width: 100%;
+                max-width: 100%;
+                max-height: 90vh;
+                height: 90vh;
+                border-radius: 16px 16px 0 0;
+                margin: 0;
+            }
+            
+            .modal-header {
+                padding: var(--spacing-4);
+                position: sticky;
+                top: 0;
+                background-color: var(--card-bg);
+                z-index: 10;
+            }
+            
+            .modal-content {
+                flex-direction: column;
+                height: calc(90vh - 140px);
+            }
+            
+            .projects-sidebar {
+                width: 100%;
+                max-height: 120px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: flex;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: var(--spacing-2) 0;
+            }
+            
+            .project-item {
+                flex-shrink: 0;
+                width: 140px;
+                padding: var(--spacing-3);
+                border-bottom: none;
+                border-right: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            .project-item:last-child {
+                border-right: none;
+            }
+            
+            .project-item.active {
+                border-right: 1px solid var(--border-color);
+                border-bottom: 3px solid var(--color-orange-500);
+            }
+            
+            .cameras-grid-container {
+                padding: var(--spacing-4);
+                flex: 1;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: var(--spacing-3);
+            }
+            
+            .camera-option {
+                padding: var(--spacing-3);
+            }
+            
+            .modal-footer {
+                padding: var(--spacing-4);
+                gap: var(--spacing-2);
+                position: sticky;
+                bottom: 0;
+                background-color: var(--card-bg);
+                box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Dropdown adjustments for narrow viewports (mobile and desktop) */
+            .dropdown-menu {
+                position: fixed;
+                left: var(--spacing-2);
+                right: var(--spacing-2);
+                top: calc(var(--mobile-header-height) + var(--spacing-2));
+                bottom: auto;
+                max-width: none;
+                max-height: calc(100vh - var(--mobile-header-height) - var(--spacing-4));
+                overflow-y: auto;
+                margin: 0;
+                transform: translateY(-10px);
+                opacity: 0;
+                visibility: hidden;
+                z-index: 150;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            /* Touch-optimized controls */
+            .video-control-btn,
+            .camera-remove-btn {
+                opacity: 1;
+            }
+
+            .camera-card:hover .video-controls {
+                opacity: 1;
+            }
+            
+            /* Ensure dropdown sections are scrollable if needed */
+            .dropdown-section {
+                max-height: calc(50vh - var(--mobile-header-height));
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Better touch targets for mobile */
+            .dropdown-item {
+                padding: var(--spacing-3) 0;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+            
+            .grid-option {
+                padding: var(--spacing-2) var(--spacing-3);
+                min-height: 40px;
+            }
+        }
+
+        /* Responsive - iPhone 12 Pro (390px) */
+        @media (max-width: 430px) {
+            :root {
+                --mobile-header-height: 56px;
+            }
+            
+            .header {
+                padding: var(--spacing-2) var(--spacing-3);
+                height: var(--mobile-header-height);
+            }
+            
+            .header-content {
+                gap: var(--spacing-2);
+            }
+            
+            .logo {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: var(--spacing-2) var(--spacing-3);
+                font-size: 13px;
+                min-height: 40px;
+            }
+            
+            .btn-icon {
+                min-width: 40px;
+                min-height: 40px;
+            }
+            
+            /* Hide button text on mobile, show icons only for secondary button */
+            .btn-secondary .btn-text {
+                display: none;
+            }
+            
+            /* Always show text for primary button */
+            .btn-primary .btn-text {
+                display: inline;
+            }
+            
+            .main-container {
+                padding-top: var(--mobile-header-height);
+                height: 100vh;
+            }
+            
+            .content-area {
+                padding: var(--spacing-3);
+                height: calc(100vh - var(--mobile-header-height));
+            }
+            
+            /* Camera grid for mobile */
+            .camera-grid {
+                gap: var(--spacing-3);
+            }
+            
+            .add-camera-card {
+                min-height: 160px;
+            }
+            
+            /* Fullscreen mobile optimizations */
+            .camera-card.fullscreen .fullscreen-controls {
+                top: env(safe-area-inset-top, var(--spacing-3));
+                right: var(--spacing-3);
+                gap: var(--spacing-2);
+            }
+            
+            .fullscreen-control-btn {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .camera-card.fullscreen .camera-overlay {
+                padding: var(--spacing-3);
+                padding-bottom: calc(var(--spacing-3) + env(safe-area-inset-bottom, 0px));
+            }
+            
+            /* Modal adjustments for iPhone 12 */
+            .camera-selection-modal {
+                height: 85vh;
+                max-height: 85vh;
+            }
+            
+            .modal-content {
+                height: calc(85vh - 120px);
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-item {
+                width: 120px;
+            }
+            
+            /* Dropdown adjustments for smaller screens */
+            .dropdown-menu {
+                top: calc(var(--mobile-header-height) + var(--spacing-1));
+                max-height: calc(100vh - var(--mobile-header-height) - var(--spacing-2));
+            }
+        }
+
+        /* Very small screens (360px and below) */
+        @media (max-width: 360px) {
+            .header-controls {
+                gap: var(--spacing-1);
+            }
+            
+            .btn {
+                padding: var(--spacing-2);
+                min-height: 36px;
+            }
+            
+            .btn-icon {
+                min-width: 36px;
+                min-height: 36px;
+            }
+            
+            /* Only show primary button text on very small screens */
+            .btn-secondary {
+                padding: var(--spacing-2);
+            }
+            
+            .btn-primary {
+                flex: 1;
+                max-width: 140px;
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-2);
+            }
+            
+            .camera-option {
+                padding: var(--spacing-2);
+            }
+            
+            .camera-option-icon {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .camera-option-name {
+                font-size: 13px;
+            }
+            
+            .camera-option-status {
+                font-size: 11px;
+            }
+            
+            /* Dropdown adjustments for very small screens */
+            .dropdown-menu {
+                left: var(--spacing-1);
+                right: var(--spacing-1);
+            }
+            
+            .dropdown-section {
+                padding: var(--spacing-3);
+            }
+            
+            .grid-options {
+                flex-wrap: wrap;
+            }
+            
+            .grid-option {
+                flex: 0 0 calc(50% - var(--spacing-1));
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(247, 152, 55, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(247, 152, 55, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(247, 152, 55, 0);
+            }
+        }
+
+        .btn-primary.streaming {
+            animation: pulse 2s infinite;
+        }
+
+        /* Touch-friendly hover states */
+        @media (hover: none) and (pointer: coarse) {
+            .camera-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .video-control-btn:hover,
+            .camera-remove-btn:hover,
+            .fullscreen-control-btn:hover {
+                transform: none;
+            }
+            
+            .btn:hover::before {
+                opacity: 0;
+            }
+            
+            /* Always show controls on touch devices */
+            .video-controls,
+            .camera-remove-btn {
+                opacity: 1 !important;
+            }
+            
+            /* Better touch feedback */
+            .btn:active,
+            .video-control-btn:active,
+            .camera-remove-btn:active,
+            .fullscreen-control-btn:active,
+            .dropdown-item:active {
+                transform: scale(0.95);
+                opacity: 0.8;
+            }
+        }
+
+        /* Mobile drag states */
+        .camera-card.drag-ready {
+            animation: wiggle 0.3s ease-in-out;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+            z-index: 10;
+        }
+
+        .camera-card.dragging {
+            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-2xl);
+            z-index: 100;
+            transition: none;
+            cursor: grabbing !important;
+        }
+
+        .camera-grid.drag-active {
+            cursor: grabbing;
+        }
+
+        .camera-grid.drag-active .camera-card:not(.dragging) {
+            transform: scale(0.95);
+            opacity: 0.7;
+            cursor: grab;
+        }
+
+        /* Keep controls visible during drag mode */
+        .camera-grid.drag-active .video-controls,
+        .camera-grid.drag-active .camera-remove-btn {
+            display: none;
+        }
+
+        .camera-grid.drag-active .add-camera-card {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1.05); }
+            25% { transform: rotate(-1deg) scale(1.05); }
+            75% { transform: rotate(1deg) scale(1.05); }
+        }
+
+        /* Drag indicator overlay */
+        .drag-indicator {
+            position: absolute;
+            bottom: var(--spacing-8);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: rgba(247, 152, 55, 0.95);
+            color: white;
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .camera-card.drag-ready .drag-indicator {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Prevent text selection on mobile */
+        @media (max-width: 768px) {
+            * {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            input,
+            textarea {
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
+        }
+
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS specific styles */
+            .modal-overlay {
+                -webkit-backdrop-filter: blur(4px);
+            }
+            
+            .main-container {
+                min-height: -webkit-fill-available;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">DSDEV</a>
+            
+            <!-- Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Search cameras by name or project..."
+                    autocomplete="off"
+                >
+                <svg class="icon icon-sm search-icon" viewBox="0 0 20 20">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21L16.65 16.65" />
+                </svg>
+                <button class="search-clear" id="searchClear" aria-label="Clear search">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <path d="M6 6L14 14M6 14L14 6" stroke-width="2.5" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Header Controls -->
+            <div class="header-controls">
+                <!-- Mobile Search Toggle -->
+                <button class="btn btn-icon btn-search-mobile" id="mobileSearchToggle" aria-label="Toggle search">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21L16.65 16.65" />
+                    </svg>
+                </button>
+                
+                <button class="btn btn-primary" id="streamToggle">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20" id="streamIcon">
+                        <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                    </svg>
+                    <span class="btn-text" id="streamText">Start All Streams</span>
+                </button>
+                
+                <!-- Filters Dropdown -->
+                <div class="dropdown" id="filtersDropdown">
+                    <button class="btn btn-secondary" data-dropdown="filtersDropdown">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20">
+                            <path d="M3 5h14M5 12h10M7 19h6" />
+                        </svg>
+                        <span class="btn-text">Filters</span>
+                        <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Filter Cameras</div>
+                            
+                            <!-- Project Filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-label">Projects</div>
+                                <div id="projectFilters">
+                                    <!-- Dynamically populated -->
+                                </div>
+                            </div>
+                            
+                            <!-- Status Filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-label">Status</div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterOnline" value="online" checked>
+                                    <label for="filterOnline">Online</label>
+                                    <span class="filter-count" id="countOnline">0</span>
+                                </div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterOffline" value="offline" checked>
+                                    <label for="filterOffline">Offline</label>
+                                    <span class="filter-count" id="countOffline">0</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Type Filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-label">Type</div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterVideo" value="video" checked>
+                                    <label for="filterVideo">Video</label>
+                                    <span class="filter-count" id="countVideo">0</span>
+                                </div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterImage" value="image" checked>
+                                    <label for="filterImage">Image</label>
+                                    <span class="filter-count" id="countImage">0</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Battery Level Filter -->
+                            <div class="filter-group">
+                                <div class="filter-group-label">Battery Level</div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterBatteryGood" value="good" checked>
+                                    <label for="filterBatteryGood">Good (>30%)</label>
+                                    <span class="filter-count" id="countBatteryGood">0</span>
+                                </div>
+                                <div class="filter-checkbox">
+                                    <input type="checkbox" id="filterBatteryLow" value="low" checked>
+                                    <label for="filterBatteryLow">Low (<30%)</label>
+                                    <span class="filter-count" id="countBatteryLow">0</span>
+                                </div>
+                            </div>
+                            
+                            <button class="clear-filters-btn" id="clearFiltersBtn">Clear All Filters</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Display Options Dropdown -->
+                <div class="dropdown" id="configDropdown">
+                    <button class="btn btn-secondary" data-dropdown="configDropdown">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20">
+                            <path d="M4 6h2v2H4zM10 6h6M4 12h2v2H4zM10 12h6M4 18h2v2H4zM10 18h6" />
+                        </svg>
+                        <span class="btn-text">Display</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Grid Layout</div>
+                            <div class="grid-options">
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid1x1" value="grid-1x1">
+                                    <label for="grid1x1">1×1</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid2x2" value="grid-2x2" checked>
+                                    <label for="grid2x2">2×2</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid3x3" value="grid-3x3">
+                                    <label for="grid3x3">3×3</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid4x4" value="grid-4x4">
+                                    <label for="grid4x4">4×4</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Display Options</div>
+                            <div class="dropdown-item">
+                                <span>Show Project Names</span>
+                                <div class="toggle-switch active" id="showProjectNamesToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Show Camera Names</span>
+                                <div class="toggle-switch active" id="showCameraNamesToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Show Timestamps</span>
+                                <div class="toggle-switch active" id="showTimestampsToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Fit to Screen</span>
+                                <div class="toggle-switch" id="fitToScreenToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch active" id="darkModeToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Camera Grid -->
+            <div class="camera-grid grid-2x2" id="cameraGrid">
+                <!-- Camera Card 1 - Online with Video -->
+                <div class="camera-card" draggable="true" data-camera-id="1" data-project="downtown-tower" data-camera-name="North Entrance" data-camera-type="video">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Video for live feed -->
+                        <video class="camera-video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=450&fit=crop&q=80&fm=jpg">
+                            <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                        </video>
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="openCameraView" title="Open Camera View Page">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M11 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H15C15.5523 17 16 16.5523 16 16V8" />
+                                    <path d="M9 11L17 3" />
+                                    <path d="M17 3H12M17 3V8" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Enter Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>
+                                        <span class="status-indicator"></span>
+                                        North Entrance
+                                    </h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                            <path d="M23 7L16 12L23 17V7Z"/>
+                                            <rect x="1" y="5" width="15" height="14" rx="2"/>
+                                        </svg>
+                                        <span>Video • Paused</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 24.7px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>85%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 2 - Online with Static Image -->
+                <div class="camera-card" draggable="true" data-camera-id="2" data-project="downtown-tower" data-camera-name="Loading Dock" data-camera-type="image">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Static image for paused/snapshot view -->
+                        <img class="camera-media" src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=450&fit=crop&q=80&fm=jpg" alt="Loading Dock - Construction Site View">
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="openCameraView" title="Open Camera View Page">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M11 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H15C15.5523 17 16 16.5523 16 16V8" />
+                                    <path d="M9 11L17 3" />
+                                    <path d="M17 3H12M17 3V8" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Enter Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>
+                                        <span class="status-indicator"></span>
+                                        Loading Dock
+                                    </h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                            <rect x="3" y="3" width="14" height="14" rx="2"/>
+                                            <circle cx="10" cy="10" r="3"/>
+                                            <path d="M21 15L15.5 9.5L10 15"/>
+                                        </svg>
+                                        <span>Image</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 26.7px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>92%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 3 - Offline -->
+                <div class="camera-card" draggable="true" data-camera-id="3" data-project="downtown-tower" data-camera-name="East Perimeter" data-camera-type="image">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Offline state with last known image -->
+                        <img class="camera-media" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=450&fit=crop&q=80&fm=jpg" alt="East Perimeter - Last Known Image" style="opacity: 0.5; filter: grayscale(100%);">
+                        
+                        <div class="camera-offline">
+                            <svg class="icon icon-lg" viewBox="0 0 24 24">
+                                <path d="M1 1L23 23" />
+                                <path d="M16.72 11.06L23 7V17L19.28 14.72M16 5H3C1.89543 5 1 5.89543 1 7V17C1 18.1046 1.89543 19 3 19H16" />
+                            </svg>
+                            <span>Camera Offline</span>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>
+                                        <span class="status-indicator offline"></span>
+                                        East Perimeter
+                                    </h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">Last seen: 13:45:32</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                            <rect x="3" y="3" width="14" height="14" rx="2"/>
+                                            <circle cx="10" cy="10" r="3"/>
+                                            <path d="M21 15L15.5 9.5L10 15"/>
+                                        </svg>
+                                        <span>Offline</span>
+                                    </div>
+                                    <div class="battery-indicator" style="color: var(--color-error-500);">
+                                        <div class="battery-bar" style="border-color: var(--color-error-500);">
+                                            <div class="battery-level" style="width: 3.5px; background-color: var(--color-error-500);"></div>
+                                            <div class="battery-cap" style="background-color: var(--color-error-500);"></div>
+                                        </div>
+                                        <span>12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 4 - Online with Video -->
+                <div class="camera-card" draggable="true" data-camera-id="4" data-project="riverside-complex" data-camera-name="Crane Platform" data-camera-type="video">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Different video for variety -->
+                        <video class="camera-video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&h=450&fit=crop&q=80&fm=jpg">
+                            <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_2MB.mp4" type="video/mp4">
+                        </video>
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="openCameraView" title="Open Camera View Page">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M11 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H15C15.5523 17 16 16.5523 16 16V8" />
+                                    <path d="M9 11L17 3" />
+                                    <path d="M17 3H12M17 3V8" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Enter Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>
+                                        <span class="status-indicator"></span>
+                                        Crane Platform
+                                    </h3>
+                                    <p>Riverside Complex</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                            <path d="M23 7L16 12L23 17V7Z"/>
+                                            <rect x="1" y="5" width="15" height="14" rx="2"/>
+                                        </svg>
+                                        <span>Video • Paused</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 19.4px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>67%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Camera Card -->
+                <div class="add-camera-card" data-action="openCameraSelection">
+                    <div class="add-camera-icon">
+                        <svg class="icon" viewBox="0 0 20 20" stroke-width="2">
+                            <path d="M10 5V15M5 10H15" />
+                        </svg>
+                    </div>
+                    <span>Add Camera</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Camera Selection Modal -->
+    <div class="modal-overlay" id="cameraSelectionModal">
+        <div class="camera-selection-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Camera Feed</h2>
+                <button class="modal-close" data-action="closeCameraSelection">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <path d="M6 6L14 14M6 14L14 6" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="projects-sidebar">
+                    <div class="project-item active" data-project="downtown-tower">
+                        <div class="project-name">Downtown Tower</div>
+                        <div class="project-cameras-count">8 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="riverside-complex">
+                        <div class="project-name">Riverside Complex</div>
+                        <div class="project-cameras-count">12 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="industrial-park-b">
+                        <div class="project-name">Industrial Park B</div>
+                        <div class="project-cameras-count">15 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="metro-station">
+                        <div class="project-name">Metro Station</div>
+                        <div class="project-cameras-count">6 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="harbor-development">
+                        <div class="project-name">Harbor Development</div>
+                        <div class="project-cameras-count">10 cameras</div>
+                    </div>
+                </div>
+                
+                <div class="cameras-grid-container">
+                    <div class="cameras-grid" id="availableCamerasGrid">
+                        <!-- Cameras will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="closeCameraSelection">Cancel</button>
+                <button class="btn btn-primary" data-action="addSelectedCameras" id="addCamerasBtn" disabled>Add Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* Mobile Drag & Drop Implementation
+         * 
+         * Current approach: Long-press (500ms) to activate drag mode
+         * - Prevents conflicts with scrolling
+         * - Familiar to iOS/Android users
+         * - Visual feedback with wiggle animation and indicator
+         * 
+         * Alternative approaches you could consider:
+         * 1. Edit Mode Toggle: Add an "Edit Layout" button that enables drag mode
+         * 2. Drag Handle: Add a grip icon (⋮⋮) that users must grab to drag
+         * 3. Swipe Actions: Horizontal swipe to reveal up/down arrows for reordering
+         * 4. Modal Reorder: Open a dedicated reorder screen with larger touch targets
+         */
+
+        // Search and Filter State
+        let searchTerm = '';
+        let activeFilters = {
+            projects: [],
+            status: ['online', 'offline'],
+            type: ['video', 'image'],
+            battery: ['good', 'low']
+        };
+
+        // Initialize Search
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchClear = document.getElementById('searchClear');
+            const searchContainer = document.getElementById('searchContainer');
+            const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+            
+            // Search input handler
+            searchInput.addEventListener('input', function(e) {
+                searchTerm = e.target.value.toLowerCase();
+                searchContainer.classList.toggle('has-value', searchTerm.length > 0);
+                applyFilters();
+            });
+            
+            // Clear search
+            searchClear.addEventListener('click', function() {
+                searchInput.value = '';
+                searchTerm = '';
+                searchContainer.classList.remove('has-value');
+                applyFilters();
+                searchInput.focus();
+            });
+            
+            // Mobile search toggle
+            if (mobileSearchToggle) {
+                mobileSearchToggle.addEventListener('click', function() {
+                    searchContainer.classList.toggle('mobile-active');
+                    if (searchContainer.classList.contains('mobile-active')) {
+                        searchInput.focus();
+                    }
+                });
+            }
+            
+            // Close mobile search on escape
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && window.innerWidth <= 768) {
+                    searchContainer.classList.remove('mobile-active');
+                    searchInput.blur();
+                }
+            });
+        }
+
+        // Initialize Filters
+        function initializeFilters() {
+            populateProjectFilters();
+            updateFilterCounts();
+            
+            // Status filters
+            document.getElementById('filterOnline').addEventListener('change', handleFilterChange);
+            document.getElementById('filterOffline').addEventListener('change', handleFilterChange);
+            
+            // Type filters
+            document.getElementById('filterVideo').addEventListener('change', handleFilterChange);
+            document.getElementById('filterImage').addEventListener('change', handleFilterChange);
+            
+            // Battery filters
+            document.getElementById('filterBatteryGood').addEventListener('change', handleFilterChange);
+            document.getElementById('filterBatteryLow').addEventListener('change', handleFilterChange);
+            
+            // Clear filters button
+            document.getElementById('clearFiltersBtn').addEventListener('click', clearAllFilters);
+        }
+
+        // Populate project filters dynamically
+        function populateProjectFilters() {
+            const projectFiltersContainer = document.getElementById('projectFilters');
+            const projects = getUniqueProjects();
+            
+            projectFiltersContainer.innerHTML = '';
+            projects.forEach(project => {
+                const checkbox = document.createElement('div');
+                checkbox.className = 'filter-checkbox';
+                checkbox.innerHTML = `
+                    <input type="checkbox" id="filterProject${project.id}" value="${project.id}" checked>
+                    <label for="filterProject${project.id}">${project.name}</label>
+                    <span class="filter-count" id="countProject${project.id}">0</span>
+                `;
+                
+                checkbox.querySelector('input').addEventListener('change', handleFilterChange);
+                projectFiltersContainer.appendChild(checkbox);
+            });
+            
+            // Initialize project filters in activeFilters
+            activeFilters.projects = projects.map(p => p.id);
+        }
+
+        // Get unique projects from camera cards
+        function getUniqueProjects() {
+            const projects = new Map();
+            document.querySelectorAll('.camera-card').forEach(card => {
+                const projectId = card.dataset.project;
+                if (projectId && projectsData[projectId]) {
+                    projects.set(projectId, {
+                        id: projectId,
+                        name: projectsData[projectId].name
+                    });
+                }
+            });
+            return Array.from(projects.values());
+        }
+
+        // Handle filter changes
+        function handleFilterChange(e) {
+            const filterType = e.target.id;
+            const value = e.target.value;
+            const isChecked = e.target.checked;
+            
+            if (filterType.startsWith('filterProject')) {
+                updateFilterArray(activeFilters.projects, value, isChecked);
+            } else if (filterType === 'filterOnline' || filterType === 'filterOffline') {
+                updateFilterArray(activeFilters.status, value, isChecked);
+            } else if (filterType === 'filterVideo' || filterType === 'filterImage') {
+                updateFilterArray(activeFilters.type, value, isChecked);
+            } else if (filterType === 'filterBatteryGood' || filterType === 'filterBatteryLow') {
+                updateFilterArray(activeFilters.battery, value, isChecked);
+            }
+            
+            applyFilters();
+            updateFilterBadge();
+        }
+
+        // Helper to update filter arrays
+        function updateFilterArray(array, value, add) {
+            if (add && !array.includes(value)) {
+                array.push(value);
+            } else if (!add) {
+                const index = array.indexOf(value);
+                if (index > -1) array.splice(index, 1);
+            }
+        }
+
+        // Apply all filters
+        function applyFilters() {
+            const cards = document.querySelectorAll('.camera-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const shouldShow = matchesFilters(card);
+                card.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+            
+            // Show/hide no results message
+            showNoResultsMessage(visibleCount === 0);
+            updateFilterCounts();
+        }
+
+        // Check if card matches all filters
+        function matchesFilters(card) {
+            // Search filter
+            if (searchTerm) {
+                const cameraName = (card.dataset.cameraName || '').toLowerCase();
+                const projectName = getProjectName(card.dataset.project).toLowerCase();
+                if (!cameraName.includes(searchTerm) && !projectName.includes(searchTerm)) {
+                    return false;
+                }
+            }
+            
+            // Project filter
+            if (!activeFilters.projects.includes(card.dataset.project)) {
+                return false;
+            }
+            
+            // Status filter
+            const status = getCardStatus(card);
+            if (!activeFilters.status.includes(status)) {
+                return false;
+            }
+            
+            // Type filter
+            if (!activeFilters.type.includes(card.dataset.cameraType)) {
+                return false;
+            }
+            
+            // Battery filter
+            const batteryLevel = getCardBatteryLevel(card);
+            const batteryStatus = batteryLevel >= 30 ? 'good' : 'low';
+            if (!activeFilters.battery.includes(batteryStatus)) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Helper functions
+        function getProjectName(projectId) {
+            return projectsData[projectId]?.name || '';
+        }
+
+        function getCardStatus(card) {
+            const statusIndicator = card.querySelector('.status-indicator');
+            return statusIndicator?.classList.contains('offline') ? 'offline' : 'online';
+        }
+
+        function getCardBatteryLevel(card) {
+            const batteryText = card.querySelector('.battery-indicator span')?.textContent || '0%';
+            return parseInt(batteryText.replace('%', '')) || 0;
+        }
+
+        // Update filter counts
+        function updateFilterCounts() {
+            const cards = document.querySelectorAll('.camera-card');
+            const counts = {
+                projects: {},
+                online: 0,
+                offline: 0,
+                video: 0,
+                image: 0,
+                batteryGood: 0,
+                batteryLow: 0
+            };
+            
+            cards.forEach(card => {
+                if (card.style.display !== 'none') {
+                    // Project counts
+                    const project = card.dataset.project;
+                    counts.projects[project] = (counts.projects[project] || 0) + 1;
+                    
+                    // Status counts
+                    const status = getCardStatus(card);
+                    counts[status]++;
+                    
+                    // Type counts
+                    counts[card.dataset.cameraType]++;
+                    
+                    // Battery counts
+                    const batteryLevel = getCardBatteryLevel(card);
+                    if (batteryLevel >= 30) {
+                        counts.batteryGood++;
+                    } else {
+                        counts.batteryLow++;
+                    }
+                }
+            });
+            
+            // Update UI
+            document.getElementById('countOnline').textContent = counts.online;
+            document.getElementById('countOffline').textContent = counts.offline;
+            document.getElementById('countVideo').textContent = counts.video;
+            document.getElementById('countImage').textContent = counts.image;
+            document.getElementById('countBatteryGood').textContent = counts.batteryGood;
+            document.getElementById('countBatteryLow').textContent = counts.batteryLow;
+            
+            // Update project counts
+            Object.keys(counts.projects).forEach(projectId => {
+                const countElement = document.getElementById(`countProject${projectId}`);
+                if (countElement) {
+                    countElement.textContent = counts.projects[projectId] || 0;
+                }
+            });
+        }
+
+        // Update filter badge
+        function updateFilterBadge() {
+            const badge = document.getElementById('filterBadge');
+            let activeCount = 0;
+            
+            // Count deselected filters
+            const totalProjects = document.querySelectorAll('#projectFilters input').length;
+            const totalFilters = totalProjects + 6; // projects + 2 status + 2 type + 2 battery
+            const checkedFilters = document.querySelectorAll('#filtersDropdown input:checked').length;
+            
+            activeCount = totalFilters - checkedFilters;
+            
+            if (activeCount > 0) {
+                badge.textContent = activeCount;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            // Reset all checkboxes
+            document.querySelectorAll('#filtersDropdown input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            
+            // Reset active filters
+            activeFilters = {
+                projects: getUniqueProjects().map(p => p.id),
+                status: ['online', 'offline'],
+                type: ['video', 'image'],
+                battery: ['good', 'low']
+            };
+            
+            applyFilters();
+            updateFilterBadge();
+        }
+
+        // Show no results message
+        function showNoResultsMessage(show) {
+            const grid = document.getElementById('cameraGrid');
+            let noResults = grid.querySelector('.no-results');
+            
+            if (show && !noResults) {
+                noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = `
+                    <svg class="icon no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21L16.65 16.65" />
+                        <path d="M8 8L14 14M8 14L14 8" />
+                    </svg>
+                    <h3>No cameras found</h3>
+                    <p>Try adjusting your search or filters</p>
+                    <button class="btn btn-secondary" onclick="clearSearchAndFilters()">Clear Search & Filters</button>
+                `;
+                grid.appendChild(noResults);
+            } else if (!show && noResults) {
+                noResults.remove();
+            }
+        }
+
+        // Clear search and filters
+        function clearSearchAndFilters() {
+            // Clear search
+            document.getElementById('searchInput').value = '';
+            searchTerm = '';
+            document.getElementById('searchContainer').classList.remove('has-value');
+            
+            // Clear filters
+            clearAllFilters();
+        }
+
+        // Update existing addSelectedCameras and removeCamera functions to reinitialize filters
+        const originalAddSelectedCameras = addSelectedCameras;
+        addSelectedCameras = function() {
+            originalAddSelectedCameras();
+            populateProjectFilters();
+            updateFilterCounts();
+        };
+
+        const originalRemoveCamera = removeCamera;
+        removeCamera = function(button) {
+            originalRemoveCamera(button);
+            populateProjectFilters();
+            updateFilterCounts();
+        };
+
+        // Projects and Camera Data
+        const projectsData = {
+            'downtown-tower': {
+                name: 'Downtown Tower',
+                cameras: [
+                    { id: 'dt-001', name: 'North Entrance', status: 'online', battery: 85, type: 'video' },
+                    { id: 'dt-002', name: 'Loading Dock', status: 'online', battery: 92, type: 'image' },
+                    { id: 'dt-003', name: 'East Perimeter', status: 'offline', battery: 12, type: 'image' },
+                    { id: 'dt-004', name: 'South Gate', status: 'online', battery: 78, type: 'video' },
+                    { id: 'dt-005', name: 'Parking Area', status: 'online', battery: 65, type: 'image' },
+                    { id: 'dt-006', name: 'Main Lobby', status: 'online', battery: 88, type: 'video' },
+                    { id: 'dt-007', name: 'Elevator Bank', status: 'maintenance', battery: 45, type: 'image' },
+                    { id: 'dt-008', name: 'Roof Access', status: 'online', battery: 72, type: 'video' }
+                ]
+            },
+            'riverside-complex': {
+                name: 'Riverside Complex',
+                cameras: [
+                    { id: 'rc-001', name: 'Crane Platform', status: 'online', battery: 67, type: 'video' },
+                    { id: 'rc-002', name: 'Foundation Area', status: 'online', battery: 89, type: 'image' },
+                    { id: 'rc-003', name: 'Material Storage', status: 'online', battery: 56, type: 'video' },
+                    { id: 'rc-004', name: 'River View', status: 'offline', battery: 23, type: 'image' },
+                    { id: 'rc-005', name: 'Access Road', status: 'online', battery: 91, type: 'video' },
+                    { id: 'rc-006', name: 'Worker Entrance', status: 'online', battery: 74, type: 'image' },
+                    { id: 'rc-007', name: 'Concrete Plant', status: 'online', battery: 82, type: 'video' },
+                    { id: 'rc-008', name: 'Dock Area', status: 'maintenance', battery: 34, type: 'image' },
+                    { id: 'rc-009', name: 'Security Gate', status: 'online', battery: 95, type: 'video' },
+                    { id: 'rc-010', name: 'Equipment Yard', status: 'online', battery: 61, type: 'image' },
+                    { id: 'rc-011', name: 'Building A Site', status: 'online', battery: 79, type: 'video' },
+                    { id: 'rc-012', name: 'Building B Site', status: 'online', battery: 86, type: 'image' }
+                ]
+            },
+            'industrial-park-b': {
+                name: 'Industrial Park B',
+                cameras: [
+                    { id: 'ipb-001', name: 'Main Entrance', status: 'online', battery: 93, type: 'video' },
+                    { id: 'ipb-002', name: 'Warehouse 1', status: 'online', battery: 77, type: 'image' },
+                    { id: 'ipb-003', name: 'Warehouse 2', status: 'online', battery: 84, type: 'video' },
+                    { id: 'ipb-004', name: 'Loading Bay A', status: 'offline', battery: 18, type: 'image' },
+                    { id: 'ipb-005', name: 'Loading Bay B', status: 'online', battery: 69, type: 'video' },
+                    { id: 'ipb-006', name: 'Admin Building', status: 'online', battery: 91, type: 'image' },
+                    { id: 'ipb-007', name: 'Parking Lot 1', status: 'online', battery: 58, type: 'video' },
+                    { id: 'ipb-008', name: 'Parking Lot 2', status: 'maintenance', battery: 42, type: 'image' },
+                    { id: 'ipb-009', name: 'Security Office', status: 'online', battery: 87, type: 'video' },
+                    { id: 'ipb-010', name: 'Fire Station', status: 'online', battery: 76, type: 'image' },
+                    { id: 'ipb-011', name: 'Power Substation', status: 'online', battery: 94, type: 'video' },
+                    { id: 'ipb-012', name: 'Water Treatment', status: 'online', battery: 83, type: 'image' },
+                    { id: 'ipb-013', name: 'Waste Management', status: 'offline', battery: 15, type: 'video' },
+                    { id: 'ipb-014', name: 'Perimeter North', status: 'online', battery: 70, type: 'image' },
+                    { id: 'ipb-015', name: 'Perimeter South', status: 'online', battery: 62, type: 'video' }
+                ]
+            },
+            'metro-station': {
+                name: 'Metro Station',
+                cameras: [
+                    { id: 'ms-001', name: 'Platform A', status: 'online', battery: 89, type: 'video' },
+                    { id: 'ms-002', name: 'Platform B', status: 'online', battery: 76, type: 'video' },
+                    { id: 'ms-003', name: 'Concourse', status: 'online', battery: 92, type: 'image' },
+                    { id: 'ms-004', name: 'Escalator Area', status: 'maintenance', battery: 38, type: 'video' },
+                    { id: 'ms-005', name: 'Ticket Hall', status: 'online', battery: 85, type: 'image' },
+                    { id: 'ms-006', name: 'Emergency Exit', status: 'online', battery: 71, type: 'video' }
+                ]
+            },
+            'harbor-development': {
+                name: 'Harbor Development',
+                cameras: [
+                    { id: 'hd-001', name: 'Pier 1', status: 'online', battery: 81, type: 'video' },
+                    { id: 'hd-002', name: 'Pier 2', status: 'online', battery: 74, type: 'image' },
+                    { id: 'hd-003', name: 'Marina Office', status: 'online', battery: 96, type: 'video' },
+                    { id: 'hd-004', name: 'Fuel Station', status: 'offline', battery: 27, type: 'image' },
+                    { id: 'hd-005', name: 'Boat Ramp', status: 'online', battery: 63, type: 'video' },
+                    { id: 'hd-006', name: 'Parking Area', status: 'online', battery: 88, type: 'image' },
+                    { id: 'hd-007', name: 'Restaurant Deck', status: 'online', battery: 79, type: 'video' },
+                    { id: 'hd-008', name: 'Lighthouse', status: 'maintenance', battery: 51, type: 'image' },
+                    { id: 'hd-009', name: 'Breakwater', status: 'online', battery: 67, type: 'video' },
+                    { id: 'hd-010', name: 'Harbor Master', status: 'online', battery: 90, type: 'image' }
+                ]
+            }
+        };
+
+        // Pool of valid construction site images from Unsplash
+        const constructionImagePool = [
+            'photo-1504917595217-d4dc5ebe6122', // Construction site aerial view
+            'photo-1541888946425-d81bb19240f5', // Construction workers
+            'photo-1503387762-592deb58ef4e', // Building crane
+            'photo-1581094271901-8022df4466f9', // Construction materials
+            'photo-1590736969955-71cc94901144', // Construction site overview
+            'photo-1572981779307-38b8cabb2407', // Construction machinery
+            'photo-1604709177225-055f99402ea3', // Construction progress
+            'photo-1578662996442-48f60103fc96', // Building construction
+            'photo-1531834685032-c34bf0d84c77', // Construction framework
+            'photo-1574359411659-15573a27fd0c'  // Construction equipment
+        ];
+
+        // Configuration for image source
+        const imageConfig = {
+            source: 'local',
+            localPath: './images/cameras/',
+            fallbackImage: 'placeholder.jpg'
+        };
+
+        // Function to get image URL based on configuration
+        function getCameraImageUrl(cameraId, cameraName) {
+            if (imageConfig.source === 'local') {
+                // Use local image - you can customize the naming convention
+                // Option 1: Use camera ID (e.g., dt-001.jpg)
+                //return `${imageConfig.localPath}${cameraId}.jpg`;
+                
+                // Option 2: Use camera name (e.g., north-entrance.jpg)
+                // const safeName = cameraName.toLowerCase().replace(/\s+/g, '-');
+                // return `${imageConfig.localPath}${safeName}.jpg`;
+                
+                // Option 3: Use random numbered images (e.g., construction-01.jpg)
+                const randomNum = Math.floor(Math.random() * 10) + 1;
+                return `${imageConfig.localPath}construction-${randomNum.toString().padStart(2, '0')}.jpg`;
+            } else {
+                // Use Unsplash with a pool of valid construction images
+                const randomImage = constructionImagePool[Math.floor(Math.random() * constructionImagePool.length)];
+                return `https://images.unsplash.com/${randomImage}?w=800&h=450&fit=crop&q=80&fm=jpg`;
+            }
+        }
+
+        let selectedCameras = [];
+        let currentProject = 'downtown-tower';
+
+        // Camera Management Functions
+        function openCameraSelection() {
+            const modal = document.getElementById('cameraSelectionModal');
+            modal.classList.add('active');
+            selectedCameras = [];
+            populateCamerasGrid(currentProject);
+            updateAddButton();
+            document.body.style.overflow = 'hidden';
+            
+            // Prevent iOS scroll bounce
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+            }
+        }
+
+        function closeCameraSelection() {
+            const modal = document.getElementById('cameraSelectionModal');
+            modal.classList.remove('active');
+            selectedCameras = [];
+            document.body.style.overflow = '';
+            
+            // Reset iOS scroll prevention
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+        }
+
+        function populateCamerasGrid(projectId) {
+            const grid = document.getElementById('availableCamerasGrid');
+            const project = projectsData[projectId];
+            
+            if (!project) return;
+            
+            // Get currently added camera IDs
+            const addedCameraIds = Array.from(document.querySelectorAll('.camera-card')).map(card => 
+                card.dataset.cameraId
+            );
+            
+            grid.innerHTML = '';
+            
+            project.cameras.forEach(camera => {
+                const isAdded = addedCameraIds.includes(camera.id);
+                const isDisabled = camera.status === 'maintenance' || camera.status === 'offline';
+                
+                const cameraOption = document.createElement('div');
+                cameraOption.className = `camera-option ${isAdded ? 'disabled' : ''} ${isDisabled ? 'disabled' : ''}`;
+                cameraOption.dataset.cameraId = camera.id;
+                
+                if (!isAdded && !isDisabled) {
+                    cameraOption.addEventListener('click', () => toggleCameraSelection(camera));
+                }
+                
+                cameraOption.innerHTML = `
+                    <div class="camera-option-icon">
+                        <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                            ${camera.type === 'video' ? 
+                                '<path d="M23 7L16 12L23 17V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/>' :
+                                '<rect x="3" y="3" width="14" height="14" rx="2"/><circle cx="10" cy="10" r="3"/><path d="M21 15L15.5 9.5L10 15"/>'
+                            }
+                        </svg>
+                    </div>
+                    <div class="camera-option-name">${camera.name}</div>
+                    <div class="camera-option-status">
+                        ${isAdded ? 'Already added' : camera.status === 'online' ? 'Online' : camera.status.charAt(0).toUpperCase() + camera.status.slice(1)}
+                        ${camera.status === 'online' ? ` • ${camera.battery}%` : ''}
+                    </div>
+                `;
+                
+                grid.appendChild(cameraOption);
+            });
+        }
+
+        function toggleCameraSelection(camera) {
+            const index = selectedCameras.findIndex(c => c.id === camera.id);
+            const cameraOption = document.querySelector(`[data-camera-id="${camera.id}"]`);
+            
+            if (index > -1) {
+                selectedCameras.splice(index, 1);
+                cameraOption.classList.remove('selected');
+            } else {
+                selectedCameras.push(camera);
+                cameraOption.classList.add('selected');
+            }
+            
+            updateAddButton();
+        }
+
+        function updateAddButton() {
+            const addBtn = document.getElementById('addCamerasBtn');
+            addBtn.disabled = selectedCameras.length === 0;
+            addBtn.textContent = selectedCameras.length === 0 ? 'Add Selected' : 
+                                selectedCameras.length === 1 ? 'Add 1 Camera' : 
+                                `Add ${selectedCameras.length} Cameras`;
+        }
+
+        function addSelectedCameras() {
+            const grid = document.getElementById('cameraGrid');
+            const addCard = grid.querySelector('.add-camera-card');
+            
+            selectedCameras.forEach(camera => {
+                const cameraCard = createCameraCard(camera);
+                grid.insertBefore(cameraCard, addCard);
+            });
+            
+            // Re-initialize drag and drop for new cards
+            initializeDragAndDrop();
+            saveCameraOrder();
+            
+            // Adjust grid if fit-to-screen is active
+            const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+            if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                adjustGridForFitToScreen();
+            }
+            
+            closeCameraSelection();
+        }
+
+        function createCameraCard(camera) {
+            const project = Object.values(projectsData).find(p => 
+                p.cameras.some(c => c.id === camera.id)
+            );
+            
+            const card = document.createElement('div');
+            card.className = 'camera-card';
+            card.draggable = true; // Always set draggable for desktop functionality
+            
+            card.dataset.cameraId = camera.id;
+            card.dataset.project = Object.keys(projectsData).find(key => projectsData[key] === project);
+            card.dataset.cameraName = camera.name;
+            card.dataset.cameraType = camera.type;
+            
+            const mediaElement = camera.type === 'video' ? 
+                `<video class="camera-video" muted loop playsinline preload="metadata" poster="${getCameraImageUrl(camera.id, camera.name)}">
+                    <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                </video>` :
+                `<img class="camera-media" src="${getCameraImageUrl(camera.id, camera.name)}" alt="${camera.name}">`;
+            
+            const statusIndicatorClass = camera.status === 'online' ? '' : 'offline';
+            const mediaIcon = camera.type === 'video' ? 
+                `<path d="M23 7L16 12L23 17V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/>` :
+                `<rect x="3" y="3" width="14" height="14" rx="2"/><circle cx="10" cy="10" r="3"/><path d="M21 15L15.5 9.5L10 15"/>`;
+            const statusText = camera.type === 'video' ? 'Video • Paused' : 'Image';
+            const batteryColor = camera.battery < 30 ? 'var(--color-error-500)' : 'inherit';
+            const batteryWidth = (camera.battery / 100) * 29; // 29px is inner width (32px - 3px for borders)
+            
+            // Only include play button for video cameras
+            const playButton = camera.type === 'video' ? 
+                `<button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                    </svg>
+                </button>` : '';
+            
+            const fullscreenPlayButton = (camera.type === 'video' && camera.status === 'online') ? 
+                `<button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                    <svg class="icon" viewBox="0 0 20 20">
+                        <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                    </svg>
+                </button>` : '';
+            
+            card.innerHTML = `
+                <div class="camera-feed">
+                    <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                            <path d="M6 6L14 14M6 14L14 6" />
+                        </svg>
+                    </button>
+                    
+                    ${mediaElement}
+                    
+                    <div class="camera-loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    
+                    <div class="video-controls">
+                        ${playButton}
+                        <button class="video-control-btn" data-action="openCameraView" title="Open Camera View Page">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                <path d="M11 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H15C15.5523 17 16 16.5523 16 16V8" />
+                                <path d="M9 11L17 3" />
+                                <path d="M17 3H12M17 3V8" />
+                            </svg>
+                        </button>
+                        <button class="video-control-btn" data-action="toggleFullscreen" title="Enter Fullscreen">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="camera-overlay">
+                        <div class="camera-info">
+                            <div class="camera-details">
+                                <h3>
+                                    <span class="status-indicator ${statusIndicatorClass}"></span>
+                                    ${camera.name}
+                                </h3>
+                                <p>${project.name}</p>
+                                <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                            </div>
+                            <div class="camera-status">
+                                <div class="status-row">
+                                    <svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                                        ${mediaIcon}
+                                    </svg>
+                                    <span>${camera.status === 'online' ? statusText : 'Offline'}</span>
+                                </div>
+                                <div class="battery-indicator" style="color: ${batteryColor};">
+                                    <div class="battery-bar" style="border-color: ${batteryColor};">
+                                        <div class="battery-level" style="width: ${batteryWidth}px; background-color: ${batteryColor};"></div>
+                                        <div class="battery-cap" style="background-color: ${batteryColor};"></div>
+                                    </div>
+                                    <span>${camera.battery}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fullscreen-controls">
+                        ${fullscreenPlayButton}
+                        <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                            <svg class="icon" viewBox="0 0 20 20">
+                                <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function removeCamera(button) {
+            const card = button.closest('.camera-card');
+            card.remove();
+            saveCameraOrder();
+            
+            // Adjust grid if fit-to-screen is active
+            const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+            if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                adjustGridForFitToScreen();
+            }
+        }
+
+        // Theme Toggle
+        function toggleDarkMode(element) {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update toggle state
+            if (newTheme === 'dark') {
+                element.classList.add('active');
+            } else {
+                element.classList.remove('active');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        // Update toggle state on load
+        if (savedTheme === 'light') {
+            document.getElementById('darkModeToggle').classList.remove('active');
+        }
+
+        // Toggle Fit to Screen
+        function toggleFitToScreen(element) {
+            const contentArea = document.querySelector('.content-area');
+            const isActive = element.classList.contains('active');
+            
+            if (!isActive) {
+                element.classList.add('active');
+                contentArea.classList.add('fit-to-screen');
+                localStorage.setItem('fitToScreen', 'true');
+                
+                // Adjust grid based on total number of cameras
+                adjustGridForFitToScreen();
+            } else {
+                element.classList.remove('active');
+                contentArea.classList.remove('fit-to-screen');
+                localStorage.setItem('fitToScreen', 'false');
+            }
+        }
+
+        // Adjust grid layout for fit-to-screen mode
+        function adjustGridForFitToScreen() {
+            const grid = document.getElementById('cameraGrid');
+            const cameraCount = grid.querySelectorAll('.camera-card, .add-camera-card').length;
+            
+            // Remove all grid classes
+            grid.classList.remove('grid-1x1', 'grid-2x2', 'grid-3x3', 'grid-4x4');
+            
+            // Apply optimal grid based on camera count
+            if (cameraCount <= 1) {
+                grid.classList.add('grid-1x1');
+            } else if (cameraCount <= 4) {
+                grid.classList.add('grid-2x2');
+            } else if (cameraCount <= 9) {
+                grid.classList.add('grid-3x3');
+            } else {
+                grid.classList.add('grid-4x4');
+            }
+            
+            // Update the radio button to match
+            const gridClass = Array.from(grid.classList).find(c => c.startsWith('grid-'));
+            const radio = document.querySelector(`input[value="${gridClass}"]`);
+            if (radio) radio.checked = true;
+        }
+
+        // Setup dropdown event handlers
+        function setupDropdownEventHandlers() {
+            // Use event delegation for better mobile support
+            document.addEventListener('click', function(e) {
+                // Handle dropdown toggle button clicks
+                if (e.target.closest('.btn-secondary[data-dropdown]')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const dropdown = e.target.closest('.dropdown');
+                    toggleDropdown(dropdown.id);
+                    return;
+                }
+                
+                // Handle clicks inside dropdown menu - prevent closing
+                if (e.target.closest('.dropdown-menu')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                // Close dropdowns when clicking outside
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown').forEach(d => {
+                        d.classList.remove('active');
+                    });
+                }
+            });
+            
+            // Prevent touch events from closing dropdown
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.closest('.dropdown-menu')) {
+                    e.stopPropagation();
+                }
+            }, { passive: false });
+            
+            // Handle grid layout changes
+            document.addEventListener('change', function(e) {
+                if (e.target.matches('input[name="gridLayout"]')) {
+                    e.stopPropagation();
+                    const grid = document.getElementById('cameraGrid');
+                    grid.className = 'camera-grid ' + e.target.value;
+                    
+                    const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+                    if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                        adjustGridForFitToScreen();
+                    }
+                }
+            });
+            
+            // Handle toggle switches with event delegation
+            document.addEventListener('click', function(e) {
+                const toggleSwitch = e.target.closest('.toggle-switch');
+                if (toggleSwitch) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Toggle the active state
+                    toggleSwitch.classList.toggle('active');
+                    
+                    // Determine which toggle was clicked and handle it
+                    if (toggleSwitch.id === 'showProjectNamesToggle') {
+                        handleToggleSwitch(toggleSwitch, 'projectNames');
+                    } else if (toggleSwitch.id === 'showCameraNamesToggle') {
+                        handleToggleSwitch(toggleSwitch, 'cameraNames');
+                    } else if (toggleSwitch.id === 'showTimestampsToggle') {
+                        handleToggleSwitch(toggleSwitch, 'timestamps');
+                    } else if (toggleSwitch.id === 'fitToScreenToggle') {
+                        // fitToScreen has its own toggle logic
+                        toggleSwitch.classList.remove('active'); // Remove the toggle we just added
+                        toggleFitToScreen(toggleSwitch);
+                    } else if (toggleSwitch.id === 'darkModeToggle') {
+                        // darkMode has its own toggle logic
+                        toggleSwitch.classList.remove('active'); // Remove the toggle we just added
+                        toggleDarkMode(toggleSwitch);
+                    }
+                }
+            });
+        }
+
+        // Toggle Dropdown function
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const isOpen = dropdown.classList.contains('active');
+            
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown').forEach(d => {
+                d.classList.remove('active');
+            });
+            
+            // Open clicked dropdown if it was closed
+            if (!isOpen) {
+                dropdown.classList.add('active');
+            }
+        }
+
+        // Handle toggle switch changes
+        function handleToggleSwitch(element, type) {
+            const isActive = element.classList.contains('active');
+            
+            if (type === 'cameraNames') {
+                if (isActive) {
+                    document.body.classList.remove('hide-camera-names');
+                    localStorage.setItem('showCameraNames', 'true');
+                } else {
+                    document.body.classList.add('hide-camera-names');
+                    localStorage.setItem('showCameraNames', 'false');
+                }
+            } else if (type === 'timestamps') {
+                if (isActive) {
+                    document.body.classList.remove('hide-timestamps');
+                    localStorage.setItem('showTimestamps', 'true');
+                } else {
+                    document.body.classList.add('hide-timestamps');
+                    localStorage.setItem('showTimestamps', 'false');
+                }
+            } else if (type === 'projectNames') {
+                if (isActive) {
+                    document.body.classList.remove('hide-project-names');
+                    localStorage.setItem('showProjectNames', 'true');
+                } else {
+                    document.body.classList.add('hide-project-names');
+                    localStorage.setItem('showProjectNames', 'false');
+                }
+            }
+        }
+
+        // Streaming Toggle
+        let isStreaming = false;
+
+        // Update timestamps
+        function updateTimestamps() {
+            const now = new Date();
+            const timeString = now.toISOString().replace('T', ' ').substr(0, 19);
+            
+            document.querySelectorAll('.camera-details p:last-child').forEach(timestamp => {
+                if (!timestamp.textContent.includes('Last seen')) {
+                    timestamp.textContent = timeString;
+                }
+            });
+        }
+
+        // Update timestamps every second
+        setInterval(updateTimestamps, 1000);
+
+        // Video Controls
+        function toggleFullscreen(button) {
+            const card = button.closest('.camera-card');
+            card.classList.add('fullscreen');
+            document.body.style.overflow = 'hidden';
+            
+            // Pause drag functionality in fullscreen
+            card.setAttribute('draggable', 'false');
+        }
+
+        function exitFullscreen(button) {
+            const card = button.closest('.camera-card');
+            card.classList.remove('fullscreen');
+            document.body.style.overflow = '';
+            
+            // Re-enable drag functionality
+            card.setAttribute('draggable', 'true');
+        }
+
+        // Updated startLiveView function
+        function startLiveView(button) {
+            const feed = button.closest('.camera-feed');
+            const video = feed.querySelector('.camera-video');
+            const statusText = feed.querySelector('.camera-status span');
+            
+            // Only start live view if there's already a video element
+            if (!video) {
+                // It's an image camera - do nothing
+                return;
+            }
+            
+            // Get both regular and fullscreen control buttons
+            const regularControlBtn = feed.querySelector('.video-controls button[data-action="startLiveView"]');
+            const fullscreenControlBtn = feed.querySelector('.fullscreen-controls button[data-action="startLiveView"]');
+            
+            // For video elements, just start playing
+            const loading = feed.querySelector('.camera-loading');
+            
+            // Show loading spinner
+            if (loading) loading.classList.add('active');
+            
+            // Set up load handlers
+            const handleVideoReady = function() {
+                if (loading) loading.classList.remove('active');
+                statusText.textContent = 'Video • Live';
+                
+                // Update both control buttons
+                [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                    if (btn) {
+                        const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                        btn.innerHTML = `
+                            <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                            </svg>
+                        `;
+                        btn.setAttribute('data-action', 'pauseLiveView');
+                        btn.setAttribute('title', 'Pause Live View');
+                    }
+                });
+                
+                // Remove event listeners
+                video.removeEventListener('loadeddata', handleVideoReady);
+                video.removeEventListener('canplay', handleVideoReady);
+                video.removeEventListener('playing', handleVideoReady);
+            };
+            
+            // Add event listeners
+            video.addEventListener('loadeddata', handleVideoReady);
+            video.addEventListener('canplay', handleVideoReady);
+            video.addEventListener('playing', handleVideoReady);
+            
+            // Start playing
+            video.play().catch(err => {
+                // Hide loading spinner on error
+                if (loading) loading.classList.remove('active');
+                console.error('Failed to play video:', err);
+            });
+        }
+
+        function pauseLiveView(button) {
+            const feed = button.closest('.camera-feed');
+            const video = feed.querySelector('.camera-video');
+            const statusText = feed.querySelector('.camera-status span');
+            
+            if (video) {
+                video.pause();
+                
+                // Get both regular and fullscreen control buttons
+                const regularControlBtn = feed.querySelector('.video-controls button[data-action="pauseLiveView"]');
+                const fullscreenControlBtn = feed.querySelector('.fullscreen-controls button[data-action="pauseLiveView"]');
+                
+                // Update status to show paused
+                statusText.textContent = 'Video • Paused';
+                
+                // Update both control buttons
+                [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                    if (btn) {
+                        const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                        btn.innerHTML = `
+                            <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                            </svg>
+                        `;
+                        btn.setAttribute('data-action', 'startLiveView');
+                        btn.setAttribute('title', 'Start Live View');
+                    }
+                });
+            }
+        }
+        
+        // Event delegation for all button actions
+        document.addEventListener('click', function(e) {
+            // Get the action from the closest element with data-action
+            const actionElement = e.target.closest('[data-action]');
+            if (!actionElement) return;
+            
+            const action = actionElement.getAttribute('data-action');
+            
+            switch(action) {
+                case 'toggleFullscreen':
+                    e.preventDefault();
+                    toggleFullscreen(actionElement);
+                    break;
+                    
+                case 'exitFullscreen':
+                    e.preventDefault();
+                    exitFullscreen(actionElement);
+                    break;
+                    
+                case 'startLiveView':
+                    e.preventDefault();
+                    startLiveView(actionElement);
+                    break;
+                    
+                case 'pauseLiveView':
+                    e.preventDefault();
+                    pauseLiveView(actionElement);
+                    break;
+                    
+                case 'removeCamera':
+                    e.preventDefault();
+                    removeCamera(actionElement);
+                    break;
+                    
+                case 'openCameraView':
+                    e.preventDefault();
+                    const cameraCard = actionElement.closest('.camera-card');
+                    const cameraId = cameraCard.dataset.cameraId;
+                    window.open(`/camera/${cameraId}`, '_blank');
+                    break;
+                    
+                case 'openCameraSelection':
+                    e.preventDefault();
+                    openCameraSelection();
+                    break;
+                    
+                case 'closeCameraSelection':
+                    e.preventDefault();
+                    closeCameraSelection();
+                    break;
+                    
+                case 'addSelectedCameras':
+                    e.preventDefault();
+                    addSelectedCameras();
+                    break;
+            }
+        });
+        
+        // Handle streaming toggle separately
+        document.getElementById('streamToggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleStreaming();
+        });
+
+        // Project Selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.project-item')) {
+                const projectItem = e.target.closest('.project-item');
+                
+                // Update active state
+                document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+                projectItem.classList.add('active');
+                
+                // Update current project and populate cameras
+                currentProject = projectItem.dataset.project;
+                selectedCameras = [];
+                populateCamerasGrid(currentProject);
+                updateAddButton();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('cameraSelectionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCameraSelection();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Close fullscreen
+                const fullscreenCard = document.querySelector('.camera-card.fullscreen');
+                if (fullscreenCard) {
+                    fullscreenCard.classList.remove('fullscreen');
+                    document.body.style.overflow = '';
+                    // Re-enable drag functionality
+                    fullscreenCard.setAttribute('draggable', 'true');
+                }
+                
+                // Close dropdowns
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    d.classList.remove('active');
+                });
+                
+                // Close modal
+                const modal = document.getElementById('cameraSelectionModal');
+                if (modal.classList.contains('active')) {
+                    closeCameraSelection();
+                }
+            }
+        });
+
+        // Updated streaming toggle to handle videos without autoplay
+        function toggleStreaming() {
+            const btn = document.getElementById('streamToggle');
+            const btnText = document.getElementById('streamText');
+            const btnIcon = document.getElementById('streamIcon');
+            const videos = document.querySelectorAll('.camera-video');
+            
+            isStreaming = !isStreaming;
+            
+            if (isStreaming) {
+                btnText.textContent = 'Stop All Streams';
+                btnIcon.innerHTML = '<rect x="5" y="5" width="10" height="10" fill="currentColor" stroke="none" rx="2" />';
+                btn.classList.add('streaming');
+                
+                // Play all videos and update their control buttons
+                videos.forEach(video => {
+                    const loading = video.parentElement.querySelector('.camera-loading');
+                    if (loading) loading.classList.add('active');
+
+                    video.play().then(() => {
+                        if (loading) loading.classList.remove('active');
+                    }).catch(err => {
+                        if (loading) loading.classList.remove('active');
+                        console.error('Failed to play video:', err);
+                    });
+
+                    const controlBtn = video.parentElement.querySelector('.video-controls button[data-action="startLiveView"]');
+                    const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button[data-action="startLiveView"]');
+                    
+                    [controlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn) {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                    <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'pauseLiveView');
+                            btn.setAttribute('title', 'Pause Live View');
+                        }
+                    });
+                    
+                    // Update status to Live
+                    const statusText = video.parentElement.querySelector('.camera-status span');
+                    if (statusText && statusText.textContent.includes('Video')) {
+                        statusText.textContent = 'Video • Live';
+                    }
+                });
+            } else {
+                btnText.textContent = 'Start All Streams';
+                btnIcon.innerHTML = '<polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />';
+                btn.classList.remove('streaming');
+                
+                // Pause all videos and update their control buttons
+                videos.forEach(video => {
+                    video.pause();
+                    const controlBtn = video.parentElement.querySelector('.video-controls button[data-action="pauseLiveView"]');
+                    const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button[data-action="pauseLiveView"]');
+                    
+                    [controlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn) {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'startLiveView');
+                            btn.setAttribute('title', 'Start Live View');
+                        }
+                    });
+                    
+                    // Update status to Paused
+                    const statusText = video.parentElement.querySelector('.camera-status span');
+                    if (statusText && statusText.textContent.includes('Video')) {
+                        statusText.textContent = 'Video • Paused';
+                    }
+                });
+            }
+        }
+
+        // Updated Drag and Drop for Camera Cards
+        let draggedElement = null;
+        let touchTimeout = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isDraggingTouch = false;
+
+        function initializeDragAndDrop() {
+            // Remove existing event listeners to avoid duplicates
+            document.querySelectorAll('.camera-card').forEach(card => {
+                // Clone the node to remove all event listeners
+                const newCard = card.cloneNode(true);
+                card.parentNode.replaceChild(newCard, card);
+            });
+            
+            // Add event listeners to all camera cards
+            document.querySelectorAll('.camera-card').forEach(card => {
+                // Desktop drag events
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
+                card.addEventListener('dragover', handleDragOver);
+                card.addEventListener('dragleave', handleDragLeave);
+                card.addEventListener('drop', handleDrop);
+                
+                // Mobile touch events
+                card.addEventListener('touchstart', handleTouchStart, { passive: false });
+                card.addEventListener('touchmove', handleTouchMove, { passive: false });
+                card.addEventListener('touchend', handleTouchEnd);
+                card.addEventListener('touchcancel', handleTouchCancel);
+            });
+        }
+
+        // Desktop drag handlers
+        function handleDragStart(e) {
+            // Don't allow dragging in fullscreen mode
+            if (this.classList.contains('fullscreen')) {
+                e.preventDefault();
+                return;
+            }
+            
+            // Don't start drag if clicking a control button
+            const target = e.target;
+            if (target.closest('.camera-remove-btn') || 
+                target.closest('.video-control-btn') || 
+                target.closest('.fullscreen-control-btn')) {
+                e.preventDefault();
+                return;
+            }
+            
+            draggedElement = this;
+            this.style.opacity = '0.5';
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '';
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            
+            // Add visual feedback
+            if (draggedElement !== this && !this.classList.contains('drag-over')) {
+                this.style.transform = 'scale(0.95)';
+                this.classList.add('drag-over');
+            }
+            
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            this.style.transform = '';
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            this.style.transform = '';
+            this.classList.remove('drag-over');
+            
+            if (draggedElement !== this) {
+                swapElements(draggedElement, this);
+            }
+            
+            return false;
+        }
+
+        // Mobile touch handlers
+        function handleTouchStart(e) {
+            const card = this;
+            
+            // Don't allow dragging in fullscreen mode
+            if (card.classList.contains('fullscreen')) {
+                return;
+            }
+            
+            // Don't start drag if touching a control button
+            const target = e.target;
+            if (target.closest('.camera-remove-btn') || 
+                target.closest('.video-control-btn') || 
+                target.closest('.fullscreen-control-btn')) {
+                return;
+            }
+            
+            // Store initial touch position
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            
+            // Clear any existing timeout
+            if (touchTimeout) {
+                clearTimeout(touchTimeout);
+            }
+            
+            // Set up long press detection
+            touchTimeout = setTimeout(() => {
+                // Check if user hasn't moved too much (allow small movements)
+                if (!isDraggingTouch) {
+                    startTouchDrag(card, e);
+                }
+            }, 500); // 500ms long press
+        }
+
+        function handleTouchMove(e) {
+            const card = this;
+            
+            // Calculate movement distance
+            const moveX = Math.abs(e.touches[0].clientX - touchStartX);
+            const moveY = Math.abs(e.touches[0].clientY - touchStartY);
+            
+            // If user moves more than 10px, cancel long press
+            if ((moveX > 10 || moveY > 10) && !isDraggingTouch) {
+                if (touchTimeout) {
+                    clearTimeout(touchTimeout);
+                    touchTimeout = null;
+                }
+            }
+            
+            // Handle active dragging
+            if (isDraggingTouch && draggedElement) {
+                e.preventDefault(); // Prevent scrolling while dragging
+                
+                // Move the dragged element with touch
+                const touch = e.touches[0];
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                
+                if (elementBelow && elementBelow.closest('.camera-card') && 
+                    elementBelow.closest('.camera-card') !== draggedElement) {
+                    const targetCard = elementBelow.closest('.camera-card');
+                    
+                    // Visual feedback for drop target
+                    document.querySelectorAll('.camera-card').forEach(c => {
+                        if (c !== draggedElement) {
+                            c.style.transform = 'scale(0.95)';
+                        }
+                    });
+                    targetCard.style.transform = 'scale(0.9)';
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            // Clear long press timeout
+            if (touchTimeout) {
+                clearTimeout(touchTimeout);
+                touchTimeout = null;
+            }
+            
+            // Handle drop if dragging
+            if (isDraggingTouch && draggedElement) {
+                const touch = e.changedTouches[0];
+                const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                
+                if (elementBelow && elementBelow.closest('.camera-card')) {
+                    const targetCard = elementBelow.closest('.camera-card');
+                    if (targetCard !== draggedElement) {
+                        swapElements(draggedElement, targetCard);
+                    }
+                }
+                
+                endTouchDrag();
+            }
+        }
+
+        function handleTouchCancel(e) {
+            if (touchTimeout) {
+                clearTimeout(touchTimeout);
+                touchTimeout = null;
+            }
+            
+            if (isDraggingTouch) {
+                endTouchDrag();
+            }
+        }
+
+        function startTouchDrag(card, e) {
+            isDraggingTouch = true;
+            draggedElement = card;
+            
+            // Add drag indicator
+            if (!card.querySelector('.drag-indicator')) {
+                const indicator = document.createElement('div');
+                indicator.className = 'drag-indicator';
+                indicator.textContent = 'Hold to drag';
+                card.appendChild(indicator);
+            }
+            
+            // Visual feedback
+            card.classList.add('drag-ready');
+            
+            // Update indicator text after animation
+            setTimeout(() => {
+                if (isDraggingTouch) {
+                    card.classList.add('dragging');
+                    const indicator = card.querySelector('.drag-indicator');
+                    if (indicator) {
+                        indicator.textContent = 'Drag to reorder';
+                    }
+                }
+            }, 300); // Add dragging class after wiggle animation
+            
+            document.getElementById('cameraGrid').classList.add('drag-active');
+            
+            // Haptic feedback if available
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(50);
+            }
+            
+            // Prevent default touch behavior
+            e.preventDefault();
+        }
+
+        function endTouchDrag() {
+            isDraggingTouch = false;
+            
+            if (draggedElement) {
+                draggedElement.classList.remove('drag-ready', 'dragging');
+                const indicator = draggedElement.querySelector('.drag-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+            
+            // Reset all cards
+            document.querySelectorAll('.camera-card').forEach(card => {
+                card.style.transform = '';
+                card.classList.remove('drag-over');
+            });
+            
+            document.getElementById('cameraGrid').classList.remove('drag-active');
+            draggedElement = null;
+        }
+
+        function swapElements(elem1, elem2) {
+            const parent = elem1.parentNode;
+            const elem1Index = Array.from(parent.children).indexOf(elem1);
+            const elem2Index = Array.from(parent.children).indexOf(elem2);
+            
+            if (elem1Index < elem2Index) {
+                parent.insertBefore(elem1, elem2.nextSibling);
+            } else {
+                parent.insertBefore(elem1, elem2);
+            }
+            
+            // Save the new order to localStorage
+            saveCameraOrder();
+        }
+
+        // Updated save camera configuration
+        function saveCameraOrder() {
+            const cards = document.querySelectorAll('.camera-card');
+            const cameras = Array.from(cards).map(card => ({
+                id: card.dataset.cameraId,
+                project: card.dataset.project,
+                name: card.dataset.cameraName,
+                type: card.dataset.cameraType
+            }));
+            localStorage.setItem('activeCameras', JSON.stringify(cameras));
+        }
+
+        // Updated restore camera configuration
+        function restoreCameraOrder() {
+            const savedCameras = localStorage.getItem('activeCameras');
+            if (savedCameras) {
+                const cameras = JSON.parse(savedCameras);
+                const grid = document.getElementById('cameraGrid');
+                const addCard = grid.querySelector('.add-camera-card');
+                
+                // Remove existing camera cards (keep add card)
+                grid.querySelectorAll('.camera-card').forEach(card => card.remove());
+                
+                // Add cameras from saved configuration
+                cameras.forEach(savedCamera => {
+                    // Find camera data
+                    let cameraData = null;
+                    for (const [projectKey, project] of Object.entries(projectsData)) {
+                        const camera = project.cameras.find(c => c.id === savedCamera.id);
+                        if (camera) {
+                            cameraData = camera;
+                            break;
+                        }
+                    }
+                    
+                    if (cameraData) {
+                        const cameraCard = createCameraCard(cameraData);
+                        grid.insertBefore(cameraCard, addCard);
+                    }
+                });
+                
+                // Re-initialize drag and drop
+                initializeDragAndDrop();
+                
+                // Check if fit-to-screen should be applied
+                const savedFitToScreen = localStorage.getItem('fitToScreen');
+                if (savedFitToScreen === 'true') {
+                    adjustGridForFitToScreen();
+                }
+            }
+        }
+
+        // Handle window resize
+        let resizeTimeout;
+        
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                // Close all dropdowns and remove backdrop on resize
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    d.classList.remove('active');
+                });
+                
+                // Cancel any active touch drag
+                if (isDraggingTouch) {
+                    endTouchDrag();
+                }
+                
+                // Clear any touch timeout
+                if (touchTimeout) {
+                    clearTimeout(touchTimeout);
+                    touchTimeout = null;
+                }
+                
+                // Adjust grid if fit-to-screen is active
+                const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+                if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                    adjustGridForFitToScreen();
+                }
+            }, 250);
+        });
+
+        // Video event listeners
+        document.addEventListener('loadeddata', function(e) {
+            if (e.target.classList.contains('camera-video')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading && loading.classList.contains('active')) {
+                    loading.classList.remove('active');
+                }
+            }
+        }, true);
+        
+        document.addEventListener('error', function(e) {
+            if (e.target.classList.contains('camera-video')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading && loading.classList.contains('active')) {
+                    loading.classList.remove('active');
+                }
+                
+                // Show error state
+                const placeholder = document.createElement('div');
+                placeholder.className = 'camera-placeholder';
+                placeholder.innerHTML = `
+                    <div style="text-align: center; color: var(--color-error-500);">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24" style="margin-bottom: var(--spacing-2);">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8V12M12 16H12.01" />
+                        </svg>
+                        <p>Failed to load video</p>
+                    </div>
+                `;
+                e.target.style.display = 'none';
+                e.target.parentElement.appendChild(placeholder);
+            } else if (e.target.classList.contains('camera-media')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading && loading.classList.contains('active')) {
+                    loading.classList.remove('active');
+                }
+                
+                e.target.style.display = 'none';
+                
+                // Show error placeholder with image icon for image cameras
+                const placeholder = document.createElement('div');
+                placeholder.className = 'camera-placeholder';
+                placeholder.innerHTML = `
+                    <svg class="icon icon-lg" style="opacity: 0.15;" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15L16 10L5 21" />
+                    </svg>
+                `;
+                e.target.parentElement.appendChild(placeholder);
+            }
+        }, true);
+        
+        document.addEventListener('load', function(e) {
+            if (e.target.classList.contains('camera-media')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading && loading.classList.contains('active')) {
+                    loading.classList.remove('active');
+                }
+            }
+        }, true);
+
+        // Initialize everything on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Initialize Search
+            initializeSearch();
+
+            // Initialize Filters
+            initializeFilters();
+
+            // Setup dropdown event handlers AFTER DOM is ready
+            setupDropdownEventHandlers();
+            
+            // Initialize drag and drop
+            initializeDragAndDrop();
+            
+            // Restore camera configuration
+            restoreCameraOrder();
+            
+            // Restore fit-to-screen state
+            const savedFitToScreen = localStorage.getItem('fitToScreen');
+            if (savedFitToScreen === 'true') {
+                const fitToggle = document.getElementById('fitToScreenToggle');
+                if (fitToggle) {
+                    fitToggle.classList.add('active');
+                    document.querySelector('.content-area').classList.add('fit-to-screen');
+                    adjustGridForFitToScreen();
+                }
+            }
+
+            // Restore toggle states
+            const showProjectNames = localStorage.getItem('showProjectNames');
+            if (showProjectNames === 'false') {
+                document.body.classList.add('hide-project-names');
+                const toggle = document.getElementById('showProjectNamesToggle');
+                if (toggle) toggle.classList.remove('active');
+            }
+
+            const showCameraNames = localStorage.getItem('showCameraNames');
+            if (showCameraNames === 'false') {
+                document.body.classList.add('hide-camera-names');
+                const toggle = document.getElementById('showCameraNamesToggle');
+                if (toggle) toggle.classList.remove('active');
+            }
+
+            const showTimestamps = localStorage.getItem('showTimestamps');
+            if (showTimestamps === 'false') {
+                document.body.classList.add('hide-timestamps');
+                const toggle = document.getElementById('showTimestampsToggle');
+                if (toggle) toggle.classList.remove('active');
+            }
+            
+            // Update the initial video control buttons to show play state
+            document.querySelectorAll('.camera-video').forEach(video => {
+                const controlBtn = video.parentElement.querySelector('.video-controls button[data-action="startLiveView"]');
+                const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button[data-action="startLiveView"]');
+                
+                [controlBtn, fullscreenControlBtn].forEach(btn => {
+                    if (btn) {
+                        const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                        btn.innerHTML = `
+                            <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                            </svg>
+                        `;
+                        btn.setAttribute('data-action', 'startLiveView');
+                        btn.setAttribute('title', 'Start Live View');
+                    }
+                });
+                
+                // Update status to indicate not live
+                const statusText = video.parentElement.querySelector('.camera-status span');
+                if (statusText && statusText.textContent === 'Live') {
+                    statusText.textContent = 'Video • Paused';
+                }
+            });
+        });
+
+        // Prevent scrolling while dragging
+        document.addEventListener('touchmove', function(e) {
+            if (isDraggingTouch) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
