@@ -1,0 +1,3712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DSDEV Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* DSDEV Design System Variables */
+        :root {
+            /* Base Colors */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            
+            /* DSDEV Orange */
+            --color-orange-50: #fff9ef;
+            --color-orange-100: #fef2db;
+            --color-orange-200: #fde2b4;
+            --color-orange-300: #fbcd87;
+            --color-orange-400: #f9ab4d;
+            --color-orange-500: #f79837;
+            --color-orange-600: #f07c22;
+            --color-orange-700: #d65c10;
+            --color-orange-800: #a84817;
+            --color-orange-900: #883e16;
+            --color-orange-950: #4a1d09;
+            --color-orange-1000: #1b0b03;
+            
+            /* DSDEV Aqua */
+            --color-aqua-50: #edfefd;
+            --color-aqua-100: #bdfffc;
+            --color-aqua-200: #7cfff7;
+            --color-aqua-300: #33faf8;
+            --color-aqua-400: #14cbce;
+            --color-aqua-500: #00a8ad;
+            --color-aqua-600: #008e96;
+            --color-aqua-700: #02696f;
+            --color-aqua-800: #075157;
+            --color-aqua-900: #094549;
+            --color-aqua-950: #00272c;
+            
+            /* DSDEV Gray */
+            --color-gray-50: #f9f9f9;
+            --color-gray-100: #eff0f0;
+            --color-gray-200: #e1e2e3;
+            --color-gray-300: #cccecf;
+            --color-gray-400: #bbbcbe;
+            --color-gray-500: #939598;
+            --color-gray-600: #7d7f82;
+            --color-gray-700: #6a6c6f;
+            --color-gray-800: #5d5f60;
+            --color-gray-900: #515355;
+            --color-gray-950: #333335;
+            
+            /* DSDEV Warm Gray */
+            --color-warm-25: #fdfdfc;
+            --color-warm-1000: #0b0a09;
+            
+            /* Semantic Colors */
+            --color-success-500: #17b26a;
+            --color-error-500: #f04438;
+            --color-error-600: #d92d20;
+            --color-warning-500: #eaaa08;
+            
+            /* Typography */
+            --font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+            
+            /* Shadows */
+            --shadow-xs: 0px 1px 2px rgba(10, 13, 18, 0.05);
+            --shadow-sm: 0px 1px 2px rgba(10, 13, 18, 0.1), 0px 1px 3px rgba(10, 13, 18, 0.1);
+            --shadow-md: 0px 2px 4px -2px rgba(10, 13, 18, 0.06), 0px 4px 6px -1px rgba(10, 13, 18, 0.1);
+            --shadow-lg: 0px 2px 2px -1px rgba(10, 13, 18, 0.04), 0px 4px 6px -2px rgba(10, 13, 18, 0.03), 0px 12px 16px -4px rgba(10, 13, 18, 0.08);
+            --shadow-xl: 0px 3px 3px -1.5px rgba(10, 13, 18, 0.04), 0px 8px 8px -4px rgba(10, 13, 18, 0.03), 0px 20px 24px -4px rgba(10, 13, 18, 0.08);
+            --shadow-2xl: 0px 4px 4px -2px rgba(10, 13, 18, 0.04), 0px 24px 48px -12px rgba(10, 13, 18, 0.18);
+            
+            /* Spacing */
+            --spacing-1: 4px;
+            --spacing-2: 8px;
+            --spacing-3: 12px;
+            --spacing-4: 16px;
+            --spacing-5: 20px;
+            --spacing-6: 24px;
+            --spacing-8: 32px;
+            --spacing-10: 40px;
+            
+            /* Mobile-specific variables */
+            --mobile-header-height: 60px;
+            --mobile-safe-area-padding: env(safe-area-inset-bottom, 20px);
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: var(--color-warm-1000);
+            --bg-secondary: #1a1918;
+            --bg-tertiary: #252322;
+            --text-primary: var(--color-gray-50);
+            --text-secondary: var(--color-gray-300);
+            --text-tertiary: var(--color-gray-400);
+            --border-color: #2a2827;
+            --hover-bg: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(37, 35, 34, 0.4);
+            --dropdown-bg: rgba(26, 25, 24, 0.95);
+            --input-bg: #1f1d1c;
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-primary: var(--color-warm-25);
+            --bg-secondary: var(--color-white);
+            --bg-tertiary: var(--color-gray-50);
+            --text-primary: var(--color-gray-900);
+            --text-secondary: var(--color-gray-700);
+            --text-tertiary: var(--color-gray-600);
+            --border-color: var(--color-gray-200);
+            --hover-bg: rgba(0, 0, 0, 0.02);
+            --card-bg: var(--color-white);
+            --dropdown-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: var(--color-white);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-3) var(--spacing-6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-orange-500);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            flex-shrink: 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex: 1;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            flex-shrink: 0;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: var(--spacing-2) var(--spacing-4);
+            padding-left: 40px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--color-orange-500);
+            box-shadow: 0 0 0 3px rgba(247, 152, 55, 0.1);
+        }
+
+        .search-bar::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            pointer-events: none;
+        }
+
+        /* Search Autocomplete */
+        .search-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: var(--spacing-1);
+            background-color: var(--dropdown-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            max-height: 500px;
+            overflow-y: auto;
+            display: none;
+            z-index: 101;
+        }
+
+        .search-autocomplete.active {
+            display: block;
+        }
+
+        .autocomplete-category {
+            padding: var(--spacing-3) var(--spacing-4) var(--spacing-2);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .autocomplete-category:last-child {
+            border-bottom: none;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .category-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-badge.people {
+            background-color: rgba(23, 178, 106, 0.2);
+            color: var(--color-success-500);
+        }
+
+        .category-badge.vehicles {
+            background-color: rgba(0, 168, 173, 0.2);
+            color: var(--color-aqua-500);
+        }
+
+        .category-badge.heavy-equipment {
+            background-color: rgba(247, 152, 55, 0.2);
+            color: var(--color-orange-500);
+        }
+
+        .category-badge.materials-other {
+            background-color: rgba(147, 149, 152, 0.2);
+            color: var(--color-gray-500);
+        }
+
+        .category-badge.activities {
+            background-color: rgba(234, 170, 8, 0.2);
+            color: var(--color-warning-500);
+        }
+
+        .autocomplete-item {
+            padding: var(--spacing-2) var(--spacing-4);
+            margin-left: var(--spacing-6);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            border-radius: 6px;
+        }
+
+        .autocomplete-item:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .autocomplete-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .autocomplete-icon.people {
+            background-color: rgba(23, 178, 106, 0.1);
+            color: var(--color-success-500);
+        }
+
+        .autocomplete-icon.vehicles {
+            background-color: rgba(0, 168, 173, 0.1);
+            color: var(--color-aqua-500);
+        }
+
+        .autocomplete-icon.heavy-equipment {
+            background-color: rgba(247, 152, 55, 0.1);
+            color: var(--color-orange-500);
+        }
+
+        .autocomplete-icon.materials {
+            background-color: rgba(147, 149, 152, 0.1);
+            color: var(--color-gray-500);
+        }
+
+        .autocomplete-icon.activities {
+            background-color: rgba(234, 170, 8, 0.1);
+            color: var(--color-warning-500);
+        }
+
+        .autocomplete-text {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .autocomplete-highlight {
+            color: var(--color-orange-500);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: var(--spacing-2) var(--spacing-4);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            min-height: 36px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--color-orange-500);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-orange-600);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--hover-bg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-icon {
+            padding: var(--spacing-2);
+            background-color: transparent;
+            color: var(--text-secondary);
+            position: relative;
+            border-radius: 8px;
+            min-width: 36px;
+            min-height: 36px;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .btn-icon.active {
+            color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+        }
+
+        /* Alert Count Badge */
+        .alert-count {
+            color: var(--color-white);
+            background-color: var(--color-error-500);
+            padding: 0 5px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: var(--spacing-2);
+            min-width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #alertsToggle.active {
+            background-color: var(--color-orange-50);
+            border-color: var(--color-orange-500);
+            color: var(--color-orange-600);
+        }
+
+        #alertsToggle.active .alert-count {
+            background-color: var(--color-orange-600);
+        }
+
+        [data-theme="dark"] #alertsToggle.active {
+            background-color: rgba(247, 152, 55, 0.1);
+            color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        [data-theme="dark"] #alertsToggle.active .alert-count {
+            background-color: var(--color-orange-500);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: var(--spacing-2);
+            min-width: 280px;
+            background-color: var(--dropdown-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 200;
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-section {
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dropdown-section:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-3);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-2) 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            color: var(--color-orange-500);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            width: 36px;
+            height: 20px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background-color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        .toggle-slider {
+            width: 14px;
+            height: 14px;
+            background-color: var(--color-white);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(16px);
+        }
+
+        /* Grid Layout Options */
+        .grid-options {
+            display: flex;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .grid-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .grid-option:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .grid-option input[type="radio"] {
+            margin: 0;
+            accent-color: var(--color-orange-500);
+        }
+
+        .grid-option label {
+            font-size: 14px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+            min-height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: var(--spacing-6);
+            overflow-y: auto;
+            background-color: var(--bg-primary);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Camera Grid */
+        .camera-grid {
+            display: grid;
+            gap: var(--spacing-5);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .camera-grid.grid-2x2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .camera-grid.grid-3x3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .camera-grid.grid-4x4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .camera-grid.grid-1x1 {
+            grid-template-columns: 1fr;
+        }
+
+        /* Fit to Screen Mode */
+        .content-area.fit-to-screen {
+            padding-bottom: var(--spacing-4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-area.fit-to-screen .camera-grid {
+            flex: 1;
+            margin-bottom: 0;
+            display: grid;
+            height: 100%;
+            min-height: 0;
+            gap: var(--spacing-3);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-2x2 {
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-3x3 {
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .content-area.fit-to-screen .camera-grid.grid-4x4 {
+            grid-template-rows: repeat(4, 1fr);
+        }
+
+        /* Ensure feeds maintain aspect ratio in fit mode */
+        .content-area.fit-to-screen .camera-feed {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        [data-theme="light"] .content-area.fit-to-screen .camera-feed {
+            background-color: #f5f5f5;
+        }
+
+        .content-area.fit-to-screen .camera-video,
+        .content-area.fit-to-screen .camera-media {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .content-area.fit-to-screen .add-camera-card {
+            min-height: 0;
+            height: 100%;
+        }
+
+        .content-area.fit-to-screen .camera-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .camera-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: move;
+        }
+
+        .camera-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            border-color: var(--color-orange-500);
+        }
+
+        .camera-card.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            border-radius: 0;
+            cursor: default;
+        }
+
+        .camera-feed {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1918 0%, #252322 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .camera-feed {
+            background: linear-gradient(135deg, #f9f9f9 0%, #eff0f0 100%);
+        }
+
+        .camera-placeholder {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+        }
+
+        .camera-offline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            color: var(--text-tertiary);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Content */
+        .camera-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: move;
+        }
+
+        .camera-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: move;
+        }
+
+        .camera-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            display: none;
+        }
+
+        .camera-loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--color-orange-500);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Video Controls Overlay */
+        .video-controls {
+            position: absolute;
+            top: var(--spacing-3);
+            right: var(--spacing-3);
+            display: flex;
+            gap: var(--spacing-2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .camera-card:hover .video-controls {
+            opacity: 1;
+        }
+
+        /* Show controls on mobile without hover */
+        @media (hover: none) and (pointer: coarse) {
+            .video-controls {
+                opacity: 1;
+            }
+        }
+
+        .camera-card.fullscreen .video-controls {
+            display: none;
+        }
+
+        .video-control-btn {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+        }
+
+        .video-control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .video-control-btn.active {
+            background-color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        /* Camera Remove Button */
+        .camera-remove-btn {
+            position: absolute;
+            top: var(--spacing-2);
+            left: var(--spacing-2);
+            width: 28px;
+            height: 28px;
+            background-color: rgba(240, 68, 56, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+            opacity: 0;
+            transform: scale(0.8);
+            z-index: 5;
+        }
+
+        .camera-card:hover .camera-remove-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .camera-remove-btn:hover {
+            background-color: var(--color-error-600);
+            transform: scale(1.1);
+        }
+
+        /* Add Camera Button */
+        .add-camera-card {
+            background-color: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 200px;
+            color: var(--text-tertiary);
+        }
+
+        .add-camera-card:hover {
+            border-color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+            color: var(--color-orange-500);
+            transform: translateY(-2px);
+        }
+
+        .add-camera-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .add-camera-card:hover .add-camera-icon {
+            background-color: rgba(247, 152, 55, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* Camera Selection Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: var(--spacing-4);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .camera-selection-modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-2xl);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.active .camera-selection-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: var(--spacing-6);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .modal-close:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .modal-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .projects-sidebar {
+            width: 240px;
+            background-color: var(--bg-tertiary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .project-item {
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .project-item.active {
+            background-color: rgba(247, 152, 55, 0.1);
+            border-right: 3px solid var(--color-orange-500);
+            color: var(--color-orange-500);
+        }
+
+        .project-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .project-cameras-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .cameras-grid-container {
+            flex: 1;
+            padding: var(--spacing-6);
+            overflow-y: auto;
+            min-width: 0;
+        }
+
+        .cameras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+        }
+
+        .camera-option {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: var(--spacing-4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .camera-option:hover {
+            border-color: var(--color-orange-500);
+            background-color: var(--hover-bg);
+        }
+
+        .camera-option.selected {
+            border-color: var(--color-orange-500);
+            background-color: rgba(247, 152, 55, 0.1);
+        }
+
+        .camera-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: var(--bg-tertiary);
+        }
+
+        .camera-option.disabled:hover {
+            border-color: var(--border-color);
+            background-color: var(--bg-tertiary);
+        }
+
+        .camera-option-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-2);
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .camera-option.selected .camera-option-icon {
+            background-color: rgba(247, 152, 55, 0.2);
+            color: var(--color-orange-500);
+        }
+
+        .camera-option-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .camera-option-status {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .camera-option.disabled .camera-option-name,
+        .camera-option.disabled .camera-option-status {
+            color: var(--text-tertiary);
+        }
+
+        .modal-footer {
+            padding: var(--spacing-6);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-3);
+            flex-shrink: 0;
+        }
+
+        /* Fullscreen Controls */
+        .fullscreen-controls {
+            position: absolute;
+            top: var(--spacing-6);
+            right: var(--spacing-6);
+            display: none;
+            gap: var(--spacing-3);
+            z-index: 1001;
+        }
+
+        .camera-card.fullscreen .fullscreen-controls {
+            display: flex;
+        }
+
+        .fullscreen-control-btn {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-white);
+        }
+
+        .fullscreen-control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .camera-card.fullscreen .camera-feed {
+            aspect-ratio: unset;
+            height: 100vh;
+        }
+
+        .camera-card.fullscreen .camera-overlay {
+            padding: var(--spacing-6);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, transparent 100%);
+        }
+
+        .camera-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-4);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            color: var(--color-white);
+            transition: opacity 0.3s ease;
+        }
+
+        .camera-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .camera-details h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .camera-details p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+
+        .camera-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--spacing-2);
+            font-size: 13px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-success-500);
+            box-shadow: 0 0 0 2px rgba(23, 178, 106, 0.2);
+        }
+
+        .status-indicator.offline {
+            background-color: var(--color-error-500);
+            box-shadow: 0 0 0 2px rgba(240, 68, 56, 0.2);
+        }
+
+        .battery-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .battery-bar {
+            width: 32px;
+            height: 14px;
+            border: 1.5px solid currentColor;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .battery-level {
+            position: absolute;
+            top: 1.5px;
+            left: 1.5px;
+            bottom: 1.5px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .battery-cap {
+            position: absolute;
+            right: -3px;
+            top: 4px;
+            width: 2px;
+            height: 6px;
+            background-color: currentColor;
+            border-radius: 0 1px 1px 0;
+            z-index: 1;
+        }
+
+        /* Alerts Panel */
+        .alerts-panel {
+            width: 380px;
+            background-color: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            overflow-y: auto;
+            transition: margin-right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .alerts-panel.collapsed {
+            margin-right: -380px;
+        }
+
+        .alerts-header {
+            padding: var(--spacing-5) var(--spacing-6);
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .alerts-title {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .alerts-list {
+            padding: var(--spacing-4);
+            flex: 1;
+        }
+
+        .alert-item {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: var(--spacing-4);
+            margin-bottom: var(--spacing-3);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .alert-item:hover {
+            background-color: var(--hover-bg);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--color-orange-500);
+        }
+
+        .alert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .alert-type {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .alert-time {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .alert-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .alert-camera {
+            font-size: 12px;
+            color: var(--color-orange-500);
+            margin-top: var(--spacing-2);
+            font-weight: 500;
+        }
+
+        /* Filter Checkbox */
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-3);
+            margin: 0 calc(var(--spacing-3) * -1);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .filter-item:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .filter-checkbox {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            pointer-events: none;
+        }
+
+        .filter-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            pointer-events: none;
+        }
+
+        .checkbox-bg {
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            transition: all 0.2s ease;
+            background-color: transparent;
+        }
+
+        .filter-checkbox input:checked ~ .checkbox-bg {
+            background-color: var(--color-orange-500);
+            border-color: var(--color-orange-500);
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .filter-checkbox input:checked ~ .checkmark {
+            opacity: 1;
+        }
+
+        .checkmark path {
+            fill: none;
+            stroke: white;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            user-select: none;
+            flex: 1;
+        }
+
+        /* Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-lg {
+            width: 48px;
+            height: 48px;
+            stroke-width: 1.5;
+        }
+
+        /* Mobile text shortening for buttons */
+        .btn-text {
+            display: inline;
+        }
+
+        /* Responsive - Tablet */
+        @media (max-width: 1024px) {
+            .camera-grid.grid-2x2,
+            .camera-grid.grid-3x3,
+            .camera-grid.grid-4x4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Adjust fit-to-screen for tablet */
+            .content-area.fit-to-screen .camera-grid.grid-2x2,
+            .content-area.fit-to-screen .camera-grid.grid-3x3,
+            .content-area.fit-to-screen .camera-grid.grid-4x4 {
+                grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .alerts-panel {
+                width: 320px;
+            }
+            
+            .alerts-panel.collapsed {
+                margin-right: -320px;
+            }
+        }
+
+        /* Responsive - Mobile (768px and below) */
+        @media (max-width: 768px) {
+            :root {
+                --mobile-header-height: 64px;
+            }
+            
+            .header {
+                padding: var(--spacing-2) var(--spacing-4);
+                position: fixed;
+                width: 100%;
+                height: var(--mobile-header-height);
+            }
+            
+            .header-content {
+                gap: var(--spacing-2);
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .header-left {
+                gap: var(--spacing-2);
+            }
+            
+            .header-controls {
+                gap: var(--spacing-2);
+            }
+            
+            .main-container {
+                padding-top: var(--mobile-header-height);
+                height: 100vh;
+                min-height: 100vh;
+            }
+            
+            .content-area {
+                padding: var(--spacing-4);
+                height: calc(100vh - var(--mobile-header-height));
+                padding-bottom: calc(var(--spacing-4) + var(--mobile-safe-area-padding));
+            }
+            
+            .camera-grid {
+                grid-template-columns: 1fr !important;
+                gap: var(--spacing-4);
+            }
+            
+            /* Disable fit-to-screen on mobile for better UX */
+            .content-area.fit-to-screen {
+                display: block;
+            }
+            
+            .content-area.fit-to-screen .camera-grid {
+                height: auto;
+                grid-template-rows: none;
+            }
+            
+            .content-area.fit-to-screen .camera-feed {
+                aspect-ratio: 16/9;
+                height: auto;
+            }
+            
+            .content-area.fit-to-screen .camera-video,
+            .content-area.fit-to-screen .camera-media {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            /* Mobile Alerts Panel */
+            .alerts-panel {
+                position: fixed;
+                right: 0;
+                top: var(--mobile-header-height);
+                bottom: 0;
+                width: 100%;
+                max-width: 100%;
+                z-index: 99;
+                transform: translateX(0);
+                transition: transform 0.3s ease;
+                box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            .alerts-panel.collapsed {
+                transform: translateX(100%);
+                margin-right: 0;
+            }
+            
+            /* Mobile Modal */
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+            
+            .camera-selection-modal {
+                width: 100%;
+                max-width: 100%;
+                max-height: 90vh;
+                height: 90vh;
+                border-radius: 16px 16px 0 0;
+                margin: 0;
+            }
+            
+            .modal-header {
+                padding: var(--spacing-4);
+                position: sticky;
+                top: 0;
+                background-color: var(--card-bg);
+                z-index: 10;
+            }
+            
+            .modal-content {
+                flex-direction: column;
+                height: calc(90vh - 140px);
+            }
+            
+            .projects-sidebar {
+                width: 100%;
+                max-height: 120px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: flex;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: var(--spacing-2) 0;
+            }
+            
+            .project-item {
+                flex-shrink: 0;
+                width: 140px;
+                padding: var(--spacing-3);
+                border-bottom: none;
+                border-right: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            .project-item:last-child {
+                border-right: none;
+            }
+            
+            .project-item.active {
+                border-right: 1px solid var(--border-color);
+                border-bottom: 3px solid var(--color-orange-500);
+            }
+            
+            .cameras-grid-container {
+                padding: var(--spacing-4);
+                flex: 1;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: var(--spacing-3);
+            }
+            
+            .camera-option {
+                padding: var(--spacing-3);
+            }
+            
+            .modal-footer {
+                padding: var(--spacing-4);
+                gap: var(--spacing-2);
+                position: sticky;
+                bottom: 0;
+                background-color: var(--card-bg);
+                box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Mobile Dropdown */
+            .dropdown-menu {
+                position: fixed;
+                left: var(--spacing-2);
+                right: var(--spacing-2);
+                top: auto;
+                bottom: var(--spacing-2);
+                max-width: none;
+                max-height: 70vh;
+                overflow-y: auto;
+                margin: 0;
+                transform: translateY(20px);
+            }
+            
+            .dropdown.active .dropdown-menu {
+                transform: translateY(0);
+            }
+            
+            /* Mobile Search */
+            .search-container {
+                max-width: none;
+            }
+            
+            .search-autocomplete {
+                max-height: 60vh;
+                position: fixed;
+                left: var(--spacing-2);
+                right: var(--spacing-2);
+                top: calc(var(--mobile-header-height) + var(--spacing-2));
+            }
+            
+            /* Touch-optimized controls */
+            .camera-remove-btn,
+            .video-control-btn {
+                opacity: 0.8;
+                transform: scale(1);
+                width: 36px;
+                height: 36px;
+            }
+            
+            .camera-card:hover .camera-remove-btn,
+            .camera-card:hover .video-controls {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive - iPhone 12 Pro (390px) */
+        @media (max-width: 430px) {
+            :root {
+                --mobile-header-height: 56px;
+            }
+            
+            .header {
+                padding: var(--spacing-2) var(--spacing-3);
+                height: var(--mobile-header-height);
+            }
+            
+            .header-content {
+                gap: var(--spacing-2);
+            }
+            
+            .logo {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: var(--spacing-2) var(--spacing-3);
+                font-size: 13px;
+                min-height: 40px;
+            }
+            
+            .btn-icon {
+                min-width: 40px;
+                min-height: 40px;
+            }
+            
+            /* Hide button text on mobile, show icons only */
+            .btn-text {
+                display: none;
+            }
+            
+            .btn-primary .btn-text {
+                display: inline;
+            }
+            
+            .search-bar {
+                padding: var(--spacing-2) var(--spacing-3);
+                padding-left: 36px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .main-container {
+                padding-top: var(--mobile-header-height);
+                height: 100vh;
+            }
+            
+            .content-area {
+                padding: var(--spacing-3);
+                height: calc(100vh - var(--mobile-header-height));
+            }
+            
+            /* Camera grid for mobile */
+            .camera-grid {
+                gap: var(--spacing-3);
+            }
+            
+            .add-camera-card {
+                min-height: 160px;
+            }
+            
+            /* Fullscreen mobile optimizations */
+            .camera-card.fullscreen .fullscreen-controls {
+                top: env(safe-area-inset-top, var(--spacing-3));
+                right: var(--spacing-3);
+                gap: var(--spacing-2);
+            }
+            
+            .fullscreen-control-btn {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .camera-card.fullscreen .camera-overlay {
+                padding: var(--spacing-3);
+                padding-bottom: calc(var(--spacing-3) + env(safe-area-inset-bottom, 0px));
+            }
+            
+            /* Modal adjustments for iPhone 12 */
+            .camera-selection-modal {
+                height: 85vh;
+                max-height: 85vh;
+            }
+            
+            .modal-content {
+                height: calc(85vh - 120px);
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-item {
+                width: 120px;
+            }
+        }
+
+        /* Very small screens (360px and below) */
+        @media (max-width: 360px) {
+            .header-controls {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                width: 100%;
+            }
+            
+            .btn-primary {
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            .search-container {
+                order: -1;
+                width: 100%;
+                margin-bottom: var(--spacing-2);
+            }
+            
+            .cameras-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-2);
+            }
+            
+            .camera-option {
+                padding: var(--spacing-2);
+            }
+            
+            .camera-option-icon {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .camera-option-name {
+                font-size: 13px;
+            }
+            
+            .camera-option-status {
+                font-size: 11px;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(247, 152, 55, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(247, 152, 55, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(247, 152, 55, 0);
+            }
+        }
+
+        .btn-primary.streaming {
+            animation: pulse 2s infinite;
+        }
+
+        /* Touch-friendly hover states */
+        @media (hover: none) and (pointer: coarse) {
+            .camera-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .video-control-btn:hover,
+            .camera-remove-btn:hover,
+            .fullscreen-control-btn:hover {
+                transform: none;
+            }
+            
+            .btn:hover::before {
+                opacity: 0;
+            }
+        }
+
+        /* Prevent text selection on mobile */
+        @media (max-width: 768px) {
+            * {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            
+            input,
+            textarea {
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
+        }
+
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS specific styles */
+            .modal-overlay {
+                -webkit-backdrop-filter: blur(4px);
+            }
+            
+            .search-bar {
+                font-size: 16px; /* Prevent zoom on focus */
+            }
+            
+            .main-container {
+                min-height: -webkit-fill-available;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">DSDEV</a>
+            
+            <div class="header-left">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <svg class="icon icon-sm search-icon" viewBox="0 0 20 20">
+                        <circle cx="9" cy="9" r="7" />
+                        <path d="M15 15L19 19" />
+                    </svg>
+                    <input type="text" class="search-bar" id="searchBar" placeholder="Search for objects, activities, or events..." autocomplete="off">
+                    <div class="search-autocomplete" id="searchAutocomplete"></div>
+                </div>
+                
+                <!-- Filters Dropdown -->
+                <div class="dropdown" id="filtersDropdown">
+                    <button class="btn btn-secondary" onclick="toggleDropdown('filtersDropdown')">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20">
+                            <path d="M4 5H16M6 10H14M8 15H12" />
+                        </svg>
+                        <span class="btn-text">Filters</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Camera Status</div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Online Cameras</label>
+                            </div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Offline Cameras</label>
+                            </div>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Alert Types</div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Motion Detection</label>
+                            </div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Low Battery</label>
+                            </div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Equipment Alerts</label>
+                            </div>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Projects</div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Downtown Tower</label>
+                            </div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Riverside Complex</label>
+                            </div>
+                            <div class="filter-item" onclick="toggleFilterCheckbox(this)">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-bg"></span>
+                                    <svg class="checkmark" viewBox="0 0 14 14">
+                                        <path d="M3 7L6 10L11 4" />
+                                    </svg>
+                                </label>
+                                <label class="filter-label">Industrial Park B</label>
+                            </div>
+                        </div>
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Header Controls -->
+            <div class="header-controls">
+                <button class="btn btn-primary" id="streamToggle" onclick="toggleStreaming()">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20" id="streamIcon">
+                        <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                    </svg>
+                    <span class="btn-text" id="streamText">Start All Streams</span>
+                </button>
+                
+                <!-- Display Options Dropdown -->
+                <div class="dropdown" id="configDropdown">
+                    <button class="btn btn-secondary" onclick="toggleDropdown('configDropdown')">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20">
+                            <path d="M4 6h2v2H4zM10 6h6M4 12h2v2H4zM10 12h6M4 18h2v2H4zM10 18h6" />
+                        </svg>
+                        <span class="btn-text">Display</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Grid Layout</div>
+                            <div class="grid-options">
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid1x1" value="grid-1x1">
+                                    <label for="grid1x1">1×1</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid2x2" value="grid-2x2" checked>
+                                    <label for="grid2x2">2×2</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid3x3" value="grid-3x3">
+                                    <label for="grid3x3">3×3</label>
+                                </div>
+                                <div class="grid-option">
+                                    <input type="radio" name="gridLayout" id="grid4x4" value="grid-4x4">
+                                    <label for="grid4x4">4×4</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-label">Display Options</div>
+                            <div class="dropdown-item">
+                                <span>Show Camera Names</span>
+                                <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Show Timestamps</span>
+                                <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Auto-rotate Views</span>
+                                <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Fit to Screen</span>
+                                <div class="toggle-switch" id="fitToScreenToggle" onclick="toggleFitToScreen(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="dropdown-item">
+                                <span>Dark Mode</span>
+                                <div class="toggle-switch active" id="darkModeToggle" onclick="toggleDarkMode(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts Toggle -->
+                <button class="btn btn-secondary" id="alertsToggle" onclick="toggleAlertsPanel()">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 003 13.414V14a1 1 0 001 1h12a1 1 0 001-1v-.586a1 1 0 00-.293-.707L16 12V8a6 6 0 00-6-6zM12 18a2 2 0 11-4 0" />
+                    </svg>
+                    <span class="btn-text">Alerts</span>
+                    <span class="alert-count">6</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Camera Grid -->
+            <div class="camera-grid grid-2x2" id="cameraGrid">
+                <!-- Camera Card 1 - Online with Video -->
+                <div class="camera-card" draggable="true" data-camera-id="1" data-project="downtown-tower" data-camera-name="North Entrance">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" stroke-width="2.5">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Video for live feed -->
+                        <video class="camera-video" muted loop playsinline>
+                            <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                        </video>
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>North Entrance</h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <div class="status-indicator"></div>
+                                        <span>Snapshot</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 24.7px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>85%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 2 - Online with Static Image -->
+                <div class="camera-card" draggable="true" data-camera-id="2" data-project="downtown-tower" data-camera-name="Loading Dock">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" stroke-width="2.5">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Static image for paused/snapshot view -->
+                        <img class="camera-media" src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=450&fit=crop" alt="Loading Dock - Construction Site View">
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>Loading Dock</h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <div class="status-indicator"></div>
+                                        <span>Snapshot</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 26.7px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>92%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 3 - Offline -->
+                <div class="camera-card" draggable="true" data-camera-id="3" data-project="downtown-tower" data-camera-name="East Perimeter">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" stroke-width="2.5">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Offline state with last known image -->
+                        <img class="camera-media" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=450&fit=crop" alt="East Perimeter - Last Known Image" style="opacity: 0.5; filter: grayscale(100%);">
+                        
+                        <div class="camera-offline">
+                            <svg class="icon icon-lg" viewBox="0 0 24 24">
+                                <path d="M1 1L23 23" />
+                                <path d="M16.72 11.06L23 7V17L19.28 14.72M16 5H3C1.89543 5 1 5.89543 1 7V17C1 18.1046 1.89543 19 3 19H16" />
+                            </svg>
+                            <span>Camera Offline</span>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>East Perimeter</h3>
+                                    <p>Downtown Tower Project</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">Last seen: 13:45:32</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <div class="status-indicator offline"></div>
+                                        <span>Offline</span>
+                                    </div>
+                                    <div class="battery-indicator" style="color: var(--color-error-500);">
+                                        <div class="battery-bar" style="border-color: var(--color-error-500);">
+                                            <div class="battery-level" style="width: 3.5px; background-color: var(--color-error-500);"></div>
+                                            <div class="battery-cap" style="background-color: var(--color-error-500);"></div>
+                                        </div>
+                                        <span>12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Card 4 - Online with Video -->
+                <div class="camera-card" draggable="true" data-camera-id="4" data-project="riverside-complex" data-camera-name="Crane Platform">
+                    <div class="camera-feed">
+                        <!-- Remove Button -->
+                        <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20" stroke-width="2.5">
+                                <path d="M6 6L14 14M6 14L14 6" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Different video for variety -->
+                        <video class="camera-video" muted loop playsinline>
+                            <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_2MB.mp4" type="video/mp4">
+                        </video>
+                        
+                        <!-- Loading indicator -->
+                        <div class="camera-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        
+                        <!-- Video Controls -->
+                        <div class="video-controls">
+                            <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="video-control-btn" data-action="toggleFullscreen" title="Fullscreen">
+                                <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                    <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="camera-overlay">
+                            <div class="camera-info">
+                                <div class="camera-details">
+                                    <h3>Crane Platform</h3>
+                                    <p>Riverside Complex</p>
+                                    <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                                </div>
+                                <div class="camera-status">
+                                    <div class="status-row">
+                                        <div class="status-indicator"></div>
+                                        <span>Snapshot</span>
+                                    </div>
+                                    <div class="battery-indicator">
+                                        <div class="battery-bar">
+                                            <div class="battery-level" style="width: 19.4px;"></div>
+                                            <div class="battery-cap"></div>
+                                        </div>
+                                        <span>67%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fullscreen controls -->
+                        <div class="fullscreen-controls">
+                            <button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                            <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Camera Card -->
+                <div class="add-camera-card" onclick="openCameraSelection()">
+                    <div class="add-camera-icon">
+                        <svg class="icon" viewBox="0 0 20 20" stroke-width="2">
+                            <path d="M10 5V15M5 10H15" />
+                        </svg>
+                    </div>
+                    <span>Add Camera</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Alerts Panel -->
+        <aside class="alerts-panel" id="alertsPanel">
+            <div class="alerts-header">
+                <h2 class="alerts-title">Recent Alerts</h2>
+            </div>
+
+            <div class="alerts-list">
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Motion Detected</div>
+                        <div class="alert-time">2 min ago</div>
+                    </div>
+                    <div class="alert-description">Vehicle entered restricted area during non-operational hours</div>
+                    <div class="alert-camera">North Entrance</div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Low Battery Warning</div>
+                        <div class="alert-time">15 min ago</div>
+                    </div>
+                    <div class="alert-description">Camera battery level critically low (12%)</div>
+                    <div class="alert-camera">East Perimeter</div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Person Detected</div>
+                        <div class="alert-time">1 hour ago</div>
+                    </div>
+                    <div class="alert-description">Unauthorized person detected in restricted zone</div>
+                    <div class="alert-camera">Loading Dock</div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Equipment Alert</div>
+                        <div class="alert-time">2 hours ago</div>
+                    </div>
+                    <div class="alert-description">Crane movement detected outside scheduled operating hours</div>
+                    <div class="alert-camera">Crane Platform</div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Connection Lost</div>
+                        <div class="alert-time">3 hours ago</div>
+                    </div>
+                    <div class="alert-description">Camera went offline - possible power or network issue</div>
+                    <div class="alert-camera">East Perimeter</div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-header">
+                        <div class="alert-type">Motion Detected</div>
+                        <div class="alert-time">4 hours ago</div>
+                    </div>
+                    <div class="alert-description">Multiple people detected near storage area</div>
+                    <div class="alert-camera">Storage Area A</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Camera Selection Modal -->
+    <div class="modal-overlay" id="cameraSelectionModal">
+        <div class="camera-selection-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Camera Feed</h2>
+                <button class="modal-close" onclick="closeCameraSelection()">
+                    <svg class="icon icon-sm" viewBox="0 0 20 20">
+                        <path d="M6 6L14 14M6 14L14 6" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="projects-sidebar">
+                    <div class="project-item active" data-project="downtown-tower">
+                        <div class="project-name">Downtown Tower</div>
+                        <div class="project-cameras-count">8 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="riverside-complex">
+                        <div class="project-name">Riverside Complex</div>
+                        <div class="project-cameras-count">12 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="industrial-park-b">
+                        <div class="project-name">Industrial Park B</div>
+                        <div class="project-cameras-count">15 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="metro-station">
+                        <div class="project-name">Metro Station</div>
+                        <div class="project-cameras-count">6 cameras</div>
+                    </div>
+                    <div class="project-item" data-project="harbor-development">
+                        <div class="project-name">Harbor Development</div>
+                        <div class="project-cameras-count">10 cameras</div>
+                    </div>
+                </div>
+                
+                <div class="cameras-grid-container">
+                    <div class="cameras-grid" id="availableCamerasGrid">
+                        <!-- Cameras will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCameraSelection()">Cancel</button>
+                <button class="btn btn-primary" onclick="addSelectedCameras()" id="addCamerasBtn" disabled>Add Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Projects and Camera Data
+        const projectsData = {
+            'downtown-tower': {
+                name: 'Downtown Tower',
+                cameras: [
+                    { id: 'dt-001', name: 'North Entrance', status: 'online', battery: 85, type: 'video' },
+                    { id: 'dt-002', name: 'Loading Dock', status: 'online', battery: 92, type: 'image' },
+                    { id: 'dt-003', name: 'East Perimeter', status: 'offline', battery: 12, type: 'image' },
+                    { id: 'dt-004', name: 'South Gate', status: 'online', battery: 78, type: 'video' },
+                    { id: 'dt-005', name: 'Parking Area', status: 'online', battery: 65, type: 'image' },
+                    { id: 'dt-006', name: 'Main Lobby', status: 'online', battery: 88, type: 'video' },
+                    { id: 'dt-007', name: 'Elevator Bank', status: 'maintenance', battery: 45, type: 'image' },
+                    { id: 'dt-008', name: 'Roof Access', status: 'online', battery: 72, type: 'video' }
+                ]
+            },
+            'riverside-complex': {
+                name: 'Riverside Complex',
+                cameras: [
+                    { id: 'rc-001', name: 'Crane Platform', status: 'online', battery: 67, type: 'video' },
+                    { id: 'rc-002', name: 'Foundation Area', status: 'online', battery: 89, type: 'image' },
+                    { id: 'rc-003', name: 'Material Storage', status: 'online', battery: 56, type: 'video' },
+                    { id: 'rc-004', name: 'River View', status: 'offline', battery: 23, type: 'image' },
+                    { id: 'rc-005', name: 'Access Road', status: 'online', battery: 91, type: 'video' },
+                    { id: 'rc-006', name: 'Worker Entrance', status: 'online', battery: 74, type: 'image' },
+                    { id: 'rc-007', name: 'Concrete Plant', status: 'online', battery: 82, type: 'video' },
+                    { id: 'rc-008', name: 'Dock Area', status: 'maintenance', battery: 34, type: 'image' },
+                    { id: 'rc-009', name: 'Security Gate', status: 'online', battery: 95, type: 'video' },
+                    { id: 'rc-010', name: 'Equipment Yard', status: 'online', battery: 61, type: 'image' },
+                    { id: 'rc-011', name: 'Building A Site', status: 'online', battery: 79, type: 'video' },
+                    { id: 'rc-012', name: 'Building B Site', status: 'online', battery: 86, type: 'image' }
+                ]
+            },
+            'industrial-park-b': {
+                name: 'Industrial Park B',
+                cameras: [
+                    { id: 'ipb-001', name: 'Main Entrance', status: 'online', battery: 93, type: 'video' },
+                    { id: 'ipb-002', name: 'Warehouse 1', status: 'online', battery: 77, type: 'image' },
+                    { id: 'ipb-003', name: 'Warehouse 2', status: 'online', battery: 84, type: 'video' },
+                    { id: 'ipb-004', name: 'Loading Bay A', status: 'offline', battery: 18, type: 'image' },
+                    { id: 'ipb-005', name: 'Loading Bay B', status: 'online', battery: 69, type: 'video' },
+                    { id: 'ipb-006', name: 'Admin Building', status: 'online', battery: 91, type: 'image' },
+                    { id: 'ipb-007', name: 'Parking Lot 1', status: 'online', battery: 58, type: 'video' },
+                    { id: 'ipb-008', name: 'Parking Lot 2', status: 'maintenance', battery: 42, type: 'image' },
+                    { id: 'ipb-009', name: 'Security Office', status: 'online', battery: 87, type: 'video' },
+                    { id: 'ipb-010', name: 'Fire Station', status: 'online', battery: 76, type: 'image' },
+                    { id: 'ipb-011', name: 'Power Substation', status: 'online', battery: 94, type: 'video' },
+                    { id: 'ipb-012', name: 'Water Treatment', status: 'online', battery: 83, type: 'image' },
+                    { id: 'ipb-013', name: 'Waste Management', status: 'offline', battery: 15, type: 'video' },
+                    { id: 'ipb-014', name: 'Perimeter North', status: 'online', battery: 70, type: 'image' },
+                    { id: 'ipb-015', name: 'Perimeter South', status: 'online', battery: 62, type: 'video' }
+                ]
+            },
+            'metro-station': {
+                name: 'Metro Station',
+                cameras: [
+                    { id: 'ms-001', name: 'Platform A', status: 'online', battery: 89, type: 'video' },
+                    { id: 'ms-002', name: 'Platform B', status: 'online', battery: 76, type: 'video' },
+                    { id: 'ms-003', name: 'Concourse', status: 'online', battery: 92, type: 'image' },
+                    { id: 'ms-004', name: 'Escalator Area', status: 'maintenance', battery: 38, type: 'video' },
+                    { id: 'ms-005', name: 'Ticket Hall', status: 'online', battery: 85, type: 'image' },
+                    { id: 'ms-006', name: 'Emergency Exit', status: 'online', battery: 71, type: 'video' }
+                ]
+            },
+            'harbor-development': {
+                name: 'Harbor Development',
+                cameras: [
+                    { id: 'hd-001', name: 'Pier 1', status: 'online', battery: 81, type: 'video' },
+                    { id: 'hd-002', name: 'Pier 2', status: 'online', battery: 74, type: 'image' },
+                    { id: 'hd-003', name: 'Marina Office', status: 'online', battery: 96, type: 'video' },
+                    { id: 'hd-004', name: 'Fuel Station', status: 'offline', battery: 27, type: 'image' },
+                    { id: 'hd-005', name: 'Boat Ramp', status: 'online', battery: 63, type: 'video' },
+                    { id: 'hd-006', name: 'Parking Area', status: 'online', battery: 88, type: 'image' },
+                    { id: 'hd-007', name: 'Restaurant Deck', status: 'online', battery: 79, type: 'video' },
+                    { id: 'hd-008', name: 'Lighthouse', status: 'maintenance', battery: 51, type: 'image' },
+                    { id: 'hd-009', name: 'Breakwater', status: 'online', battery: 67, type: 'video' },
+                    { id: 'hd-010', name: 'Harbor Master', status: 'online', battery: 90, type: 'image' }
+                ]
+            }
+        };
+
+        let selectedCameras = [];
+        let currentProject = 'downtown-tower';
+
+        // Camera Management Functions
+        function openCameraSelection() {
+            const modal = document.getElementById('cameraSelectionModal');
+            modal.classList.add('active');
+            selectedCameras = [];
+            populateCamerasGrid(currentProject);
+            updateAddButton();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCameraSelection() {
+            const modal = document.getElementById('cameraSelectionModal');
+            modal.classList.remove('active');
+            selectedCameras = [];
+            document.body.style.overflow = '';
+        }
+
+        function populateCamerasGrid(projectId) {
+            const grid = document.getElementById('availableCamerasGrid');
+            const project = projectsData[projectId];
+            
+            if (!project) return;
+            
+            // Get currently added camera IDs
+            const addedCameraIds = Array.from(document.querySelectorAll('.camera-card')).map(card => 
+                card.dataset.cameraId
+            );
+            
+            grid.innerHTML = '';
+            
+            project.cameras.forEach(camera => {
+                const isAdded = addedCameraIds.includes(camera.id);
+                const isDisabled = camera.status === 'maintenance' || camera.status === 'offline';
+                
+                const cameraOption = document.createElement('div');
+                cameraOption.className = `camera-option ${isAdded ? 'disabled' : ''} ${isDisabled ? 'disabled' : ''}`;
+                cameraOption.dataset.cameraId = camera.id;
+                
+                if (!isAdded && !isDisabled) {
+                    cameraOption.addEventListener('click', () => toggleCameraSelection(camera));
+                }
+                
+                cameraOption.innerHTML = `
+                    <div class="camera-option-icon">
+                        <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                            ${camera.type === 'video' ? 
+                                '<path d="M23 7L16 12L23 17V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/>' :
+                                '<rect x="3" y="3" width="14" height="14" rx="2"/><circle cx="10" cy="10" r="3"/><path d="M21 15L15.5 9.5L10 15"/>'
+                            }
+                        </svg>
+                    </div>
+                    <div class="camera-option-name">${camera.name}</div>
+                    <div class="camera-option-status">
+                        ${isAdded ? 'Already added' : camera.status === 'online' ? 'Online' : camera.status.charAt(0).toUpperCase() + camera.status.slice(1)}
+                        ${camera.status === 'online' ? ` • ${camera.battery}%` : ''}
+                    </div>
+                `;
+                
+                grid.appendChild(cameraOption);
+            });
+        }
+
+        function toggleCameraSelection(camera) {
+            const index = selectedCameras.findIndex(c => c.id === camera.id);
+            const cameraOption = document.querySelector(`[data-camera-id="${camera.id}"]`);
+            
+            if (index > -1) {
+                selectedCameras.splice(index, 1);
+                cameraOption.classList.remove('selected');
+            } else {
+                selectedCameras.push(camera);
+                cameraOption.classList.add('selected');
+            }
+            
+            updateAddButton();
+        }
+
+        function updateAddButton() {
+            const addBtn = document.getElementById('addCamerasBtn');
+            addBtn.disabled = selectedCameras.length === 0;
+            addBtn.textContent = selectedCameras.length === 0 ? 'Add Selected' : 
+                                selectedCameras.length === 1 ? 'Add 1 Camera' : 
+                                `Add ${selectedCameras.length} Cameras`;
+        }
+
+        function addSelectedCameras() {
+            const grid = document.getElementById('cameraGrid');
+            const addCard = grid.querySelector('.add-camera-card');
+            
+            selectedCameras.forEach(camera => {
+                const cameraCard = createCameraCard(camera);
+                grid.insertBefore(cameraCard, addCard);
+            });
+            
+            // Re-initialize drag and drop for new cards
+            initializeDragAndDrop();
+            saveCameraOrder();
+            
+            // Adjust grid if fit-to-screen is active
+            const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+            if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                adjustGridForFitToScreen();
+            }
+            
+            closeCameraSelection();
+        }
+
+        function createCameraCard(camera) {
+            const project = Object.values(projectsData).find(p => 
+                p.cameras.some(c => c.id === camera.id)
+            );
+            
+            const card = document.createElement('div');
+            card.className = 'camera-card';
+            card.draggable = true;
+            card.dataset.cameraId = camera.id;
+            card.dataset.project = Object.keys(projectsData).find(key => projectsData[key] === project);
+            card.dataset.cameraName = camera.name;
+            
+            const mediaElement = camera.type === 'video' ? 
+                `<video class="camera-video" muted loop playsinline>
+                    <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                </video>` :
+                `<img class="camera-media" src="https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000000)}?w=800&h=450&fit=crop" alt="${camera.name}">`;
+            
+            const statusIndicatorClass = camera.status === 'online' ? '' : 'offline';
+            const statusText = camera.status === 'online' ? 'Snapshot' : 'Offline';
+            const batteryColor = camera.battery < 30 ? 'var(--color-error-500)' : 'inherit';
+            const batteryWidth = (camera.battery / 100) * 29; // 29px is inner width (32px - 3px for borders)
+            
+            card.innerHTML = `
+                <div class="camera-feed">
+                    <button class="camera-remove-btn" data-action="removeCamera" title="Remove Camera">
+                        <svg class="icon icon-sm" viewBox="0 0 20 20" stroke-width="2.5">
+                            <path d="M6 6L14 14M6 14L14 6" />
+                        </svg>
+                    </button>
+                    
+                    ${mediaElement}
+                    
+                    <div class="camera-loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    
+                    <div class="video-controls">
+                        <button class="video-control-btn" data-action="startLiveView" title="Start Live View">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                            </svg>
+                        </button>
+                        <button class="video-control-btn" data-action="toggleFullscreen" title="Fullscreen">
+                            <svg class="icon icon-sm" viewBox="0 0 20 20">
+                                <path d="M3 6V3H6M14 3H17V6M17 14V17H14M6 17H3V14" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="camera-overlay">
+                        <div class="camera-info">
+                            <div class="camera-details">
+                                <h3>${camera.name}</h3>
+                                <p>${project.name}</p>
+                                <p style="font-size: 12px; opacity: 0.7;">2024-01-15 14:32:18</p>
+                            </div>
+                            <div class="camera-status">
+                                <div class="status-row">
+                                    <div class="status-indicator ${statusIndicatorClass}"></div>
+                                    <span>${statusText}</span>
+                                </div>
+                                <div class="battery-indicator" style="color: ${batteryColor};">
+                                    <div class="battery-bar" style="border-color: ${batteryColor};">
+                                        <div class="battery-level" style="width: ${batteryWidth}px; background-color: ${batteryColor};"></div>
+                                        <div class="battery-cap" style="background-color: ${batteryColor};"></div>
+                                    </div>
+                                    <span>${camera.battery}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fullscreen-controls">
+                        ${camera.status === 'online' ? 
+                            `<button class="fullscreen-control-btn" data-action="startLiveView" title="Start Live View">
+                                <svg class="icon" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>` : ''
+                        }
+                        <button class="fullscreen-control-btn" data-action="exitFullscreen" title="Exit Fullscreen">
+                            <svg class="icon" viewBox="0 0 20 20">
+                                <path d="M6 3V6H3M3 14V17H6M14 17H17V14M17 6V3H14" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function removeCamera(button) {
+            const card = button.closest('.camera-card');
+            card.remove();
+            saveCameraOrder();
+            
+            // Adjust grid if fit-to-screen is active
+            const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+            if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                adjustGridForFitToScreen();
+            }
+        }
+
+        // Project Selection
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Update active state
+                document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update current project and populate cameras
+                currentProject = this.dataset.project;
+                selectedCameras = [];
+                populateCamerasGrid(currentProject);
+                updateAddButton();
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('cameraSelectionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCameraSelection();
+            }
+        });
+
+        // Theme Toggle
+        function toggleDarkMode(element) {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update toggle state
+            if (newTheme === 'dark') {
+                element.classList.add('active');
+            } else {
+                element.classList.remove('active');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        // Update toggle state on load
+        if (savedTheme === 'light') {
+            document.getElementById('darkModeToggle').classList.remove('active');
+        }
+
+        // Toggle Alerts Panel
+        function toggleAlertsPanel() {
+            const panel = document.getElementById('alertsPanel');
+            const toggle = document.getElementById('alertsToggle');
+            panel.classList.toggle('collapsed');
+            
+            // Fix the active state logic
+            if (panel.classList.contains('collapsed')) {
+                toggle.classList.remove('active');
+            } else {
+                toggle.classList.add('active');
+            }
+        }
+
+        // Toggle Fit to Screen
+        function toggleFitToScreen(element) {
+            const contentArea = document.querySelector('.content-area');
+            const isActive = element.classList.contains('active');
+            
+            if (!isActive) {
+                element.classList.add('active');
+                contentArea.classList.add('fit-to-screen');
+                localStorage.setItem('fitToScreen', 'true');
+                
+                // Adjust grid based on total number of cameras
+                adjustGridForFitToScreen();
+            } else {
+                element.classList.remove('active');
+                contentArea.classList.remove('fit-to-screen');
+                localStorage.setItem('fitToScreen', 'false');
+            }
+        }
+
+        // Adjust grid layout for fit-to-screen mode
+        function adjustGridForFitToScreen() {
+            const grid = document.getElementById('cameraGrid');
+            const cameraCount = grid.querySelectorAll('.camera-card, .add-camera-card').length;
+            
+            // Remove all grid classes
+            grid.classList.remove('grid-1x1', 'grid-2x2', 'grid-3x3', 'grid-4x4');
+            
+            // Apply optimal grid based on camera count
+            if (cameraCount <= 1) {
+                grid.classList.add('grid-1x1');
+            } else if (cameraCount <= 4) {
+                grid.classList.add('grid-2x2');
+            } else if (cameraCount <= 9) {
+                grid.classList.add('grid-3x3');
+            } else {
+                grid.classList.add('grid-4x4');
+            }
+            
+            // Update the radio button to match
+            const gridClass = Array.from(grid.classList).find(c => c.startsWith('grid-'));
+            const radio = document.querySelector(`input[value="${gridClass}"]`);
+            if (radio) radio.checked = true;
+        }
+
+        // Toggle Dropdown
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const isOpen = dropdown.classList.contains('active');
+            
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown').forEach(d => {
+                d.classList.remove('active');
+            });
+            
+            // Open clicked dropdown if it was closed
+            if (!isOpen) {
+                dropdown.classList.add('active');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    d.classList.remove('active');
+                });
+            }
+        });
+
+        // Toggle Switch
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        // Toggle Filter Checkbox
+        function toggleFilterCheckbox(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+        }
+
+        // Grid Layout Change
+        document.querySelectorAll('input[name="gridLayout"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const grid = document.getElementById('cameraGrid');
+                grid.className = 'camera-grid ' + this.value;
+                
+                // If fit-to-screen is active, adjust the grid rows
+                const fitToScreenToggle = document.getElementById('fitToScreenToggle');
+                if (fitToScreenToggle && fitToScreenToggle.classList.contains('active')) {
+                    adjustGridForFitToScreen();
+                }
+            });
+        });
+
+        // Streaming Toggle
+        let isStreaming = false;
+
+        // Search Autocomplete
+        const searchBar = document.getElementById('searchBar');
+        const searchAutocomplete = document.getElementById('searchAutocomplete');
+        
+        const searchSuggestions = {
+            people: {
+                label: 'People',
+                items: [
+                    { icon: 'people', text: 'Person' },
+                    { icon: 'people', text: 'Hard Hat' },
+                    { icon: 'people', text: 'Safety Vest' }
+                ]
+            },
+            vehicles: {
+                label: 'Vehicles',
+                items: [
+                    { icon: 'vehicles', text: 'Car' },
+                    { icon: 'vehicles', text: 'Pickup Truck' },
+                    { icon: 'vehicles', text: 'Truck' }
+                ]
+            },
+            heavyEquipment: {
+                label: 'Heavy Equipment',
+                items: [
+                    { icon: 'heavy-equipment', text: 'Bulldozer' },
+                    { icon: 'heavy-equipment', text: 'Cement Truck' },
+                    { icon: 'heavy-equipment', text: 'Compactor' },
+                    { icon: 'heavy-equipment', text: 'Dump Truck' },
+                    { icon: 'heavy-equipment', text: 'Excavator' },
+                    { icon: 'heavy-equipment', text: 'Grader' },
+                    { icon: 'heavy-equipment', text: 'Loader' },
+                    { icon: 'heavy-equipment', text: 'Mobile Crane' },
+                    { icon: 'heavy-equipment', text: 'Telehandler' },
+                    { icon: 'heavy-equipment', text: 'Tower Crane' },
+                    { icon: 'heavy-equipment', text: 'Tractor' }
+                ]
+            },
+            materials: {
+                label: 'Materials & Other',
+                items: [
+                    { icon: 'materials', text: 'Conex' },
+                    { icon: 'materials', text: 'Portable Toilet' },
+                    { icon: 'materials', text: 'Rebar' },
+                    { icon: 'materials', text: 'Scaffolding' },
+                    { icon: 'materials', text: 'Silo' },
+                    { icon: 'materials', text: 'Traffic Cone' },
+                    { icon: 'materials', text: 'Trash Can' }
+                ]
+            },
+            activities: {
+                label: 'Activities',
+                items: [
+                    { icon: 'activities', text: 'Concrete Pour' },
+                    { icon: 'activities', text: 'Excavation' },
+                    { icon: 'activities', text: 'Grading' },
+                    { icon: 'activities', text: 'Loading' },
+                    { icon: 'activities', text: 'Crane Operation' },
+                    { icon: 'activities', text: 'Material Delivery' },
+                    { icon: 'activities', text: 'Demolition' },
+                    { icon: 'activities', text: 'Foundation Work' },
+                    { icon: 'activities', text: 'Steel Installation' },
+                    { icon: 'activities', text: 'Equipment Movement' }
+                ]
+            }
+        };
+
+        function createAutocompleteItem(suggestion, query) {
+            const item = document.createElement('div');
+            item.className = 'autocomplete-item';
+            
+            // Icon container
+            const iconContainer = document.createElement('div');
+            iconContainer.className = `autocomplete-icon ${suggestion.icon}`;
+            
+            // Create icon HTML directly
+            let iconHTML = '';
+            switch(suggestion.icon) {
+                case 'people':
+                    iconHTML = '<svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3"/><path d="M15 19c0-2.76-2.24-5-5-5s-5 2.24-5 5"/></svg>';
+                    break;
+                case 'vehicles':
+                    iconHTML = '<svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="10" height="6" rx="1"/><rect x="13" y="9" width="4" height="4"/><circle cx="6" cy="16" r="1.5"/><circle cx="14" cy="16" r="1.5"/></svg>';
+                    break;
+                case 'heavy-equipment':
+                    iconHTML = '<svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4v10h10V7L12 4H5z"/><path d="M3 14h14v2H3z"/><circle cx="6" cy="17" r="1"/><circle cx="14" cy="17" r="1"/></svg>';
+                    break;
+                case 'materials':
+                    iconHTML = '<svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="1"/><line x1="8" y1="8" x2="12" y2="8"/><line x1="8" y1="12" x2="10" y2="12"/></svg>';
+                    break;
+                case 'activities':
+                    iconHTML = '<svg class="icon icon-sm" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><polyline points="10 7 10 10 13 12"/></svg>';
+                    break;
+            }
+            
+            iconContainer.innerHTML = iconHTML;
+            
+            // Text with highlighting
+            const text = document.createElement('div');
+            text.className = 'autocomplete-text';
+            
+            if (query) {
+                const regex = new RegExp(`(${query})`, 'gi');
+                text.innerHTML = suggestion.text.replace(regex, '<span class="autocomplete-highlight">$1</span>');
+            } else {
+                text.textContent = suggestion.text;
+            }
+            
+            item.appendChild(iconContainer);
+            item.appendChild(text);
+            
+            item.addEventListener('click', function() {
+                searchBar.value = suggestion.text;
+                searchAutocomplete.classList.remove('active');
+                searchBar.focus();
+            });
+            
+            return item;
+        }
+
+        function createCategorySection(category, items, query) {
+            const section = document.createElement('div');
+            section.className = 'autocomplete-category';
+            
+            // Category header
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            
+            const badge = document.createElement('span');
+            badge.className = `category-badge ${category.toLowerCase().replace(' & ', '-').replace(' ', '-')}`;
+            badge.textContent = category;
+            
+            header.appendChild(badge);
+            section.appendChild(header);
+            
+            // Add items
+            items.forEach(item => {
+                section.appendChild(createAutocompleteItem(item, query));
+            });
+            
+            return section;
+        }
+
+        searchBar.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            searchAutocomplete.innerHTML = '';
+            
+            if (query.length > 0) {
+                let hasResults = false;
+                
+                Object.entries(searchSuggestions).forEach(([key, category]) => {
+                    const filtered = category.items.filter(item => 
+                        item.text.toLowerCase().includes(query)
+                    );
+                    
+                    if (filtered.length > 0) {
+                        hasResults = true;
+                        searchAutocomplete.appendChild(
+                            createCategorySection(category.label, filtered, query)
+                        );
+                    }
+                });
+                
+                if (hasResults) {
+                    searchAutocomplete.classList.add('active');
+                } else {
+                    searchAutocomplete.classList.remove('active');
+                }
+            } else {
+                searchAutocomplete.classList.remove('active');
+            }
+        });
+
+        searchBar.addEventListener('focus', function() {
+            if (this.value.length === 0) {
+                searchAutocomplete.innerHTML = '';
+                // Show all categories with all items
+                Object.entries(searchSuggestions).forEach(([key, category]) => {
+                    searchAutocomplete.appendChild(
+                        createCategorySection(category.label, category.items, '')
+                    );
+                });
+                searchAutocomplete.classList.add('active');
+            }
+        });
+
+        searchBar.addEventListener('blur', function() {
+            setTimeout(() => {
+                searchAutocomplete.classList.remove('active');
+            }, 200);
+        });
+
+        // Update timestamps
+        function updateTimestamps() {
+            const now = new Date();
+            const timeString = now.toISOString().replace('T', ' ').substr(0, 19);
+            
+            document.querySelectorAll('.camera-details p:last-child').forEach(timestamp => {
+                if (!timestamp.textContent.includes('Last seen')) {
+                    timestamp.textContent = timeString;
+                }
+            });
+        }
+
+        // Update timestamps every second
+        setInterval(updateTimestamps, 1000);
+
+        // Video Controls
+        function toggleFullscreen(button) {
+            const card = button.closest('.camera-card');
+            card.classList.add('fullscreen');
+            document.body.style.overflow = 'hidden';
+            
+            // Pause drag functionality in fullscreen
+            card.setAttribute('draggable', 'false');
+        }
+
+        function exitFullscreen(button) {
+            const card = button.closest('.camera-card');
+            card.classList.remove('fullscreen');
+            document.body.style.overflow = '';
+            
+            // Re-enable drag functionality
+            card.setAttribute('draggable', 'true');
+        }
+
+        // Updated startLiveView function
+        function startLiveView(button) {
+            const feed = button.closest('.camera-feed');
+            const video = feed.querySelector('.camera-video');
+            const img = feed.querySelector('.camera-media');
+            const statusText = feed.querySelector('.camera-status span');
+            
+            // Get both regular and fullscreen control buttons
+            const regularControlBtn = feed.querySelector('.video-controls button');
+            const fullscreenControlBtn = feed.querySelector('.fullscreen-controls button');
+            
+            if (video) {
+                // For video elements, just start playing
+                const loading = feed.querySelector('.camera-loading');
+                
+                // Check if video is already loaded
+                if (video.readyState >= 3) { // HAVE_FUTURE_DATA or higher
+                    // Video is already loaded, start immediately
+                    statusText.textContent = 'Live';
+                    
+                    // Update both control buttons
+                    [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                    <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'pauseLiveView');
+                            btn.setAttribute('title', 'Pause Live View');
+                        }
+                    });
+                    
+                    video.play();
+                } else {
+                    // Video not loaded yet, show loading spinner
+                    loading.classList.add('active');
+                    
+                    const handleVideoReady = function() {
+                        loading.classList.remove('active');
+                        statusText.textContent = 'Live';
+                        
+                        // Update both control buttons
+                        [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                            if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                                const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                                btn.innerHTML = `
+                                    <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                        <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                        <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                    </svg>
+                                `;
+                                btn.setAttribute('data-action', 'pauseLiveView');
+                                btn.setAttribute('title', 'Pause Live View');
+                            }
+                        });
+                        
+                        // Remove event listeners
+                        video.removeEventListener('loadeddata', handleVideoReady);
+                        video.removeEventListener('canplay', handleVideoReady);
+                    };
+                    
+                    video.addEventListener('loadeddata', handleVideoReady);
+                    video.addEventListener('canplay', handleVideoReady);
+                    video.play();
+                }
+            } else if (img) {
+                // For image elements, create video and replace
+                const loading = feed.querySelector('.camera-loading');
+                loading.classList.add('active');
+                
+                // Create video element
+                const newVideo = document.createElement('video');
+                newVideo.className = 'camera-video';
+                newVideo.muted = true;
+                newVideo.loop = true;
+                newVideo.playsInline = true;
+                
+                // Use a different video source for variety
+                newVideo.innerHTML = '<source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">';
+                
+                newVideo.onloadeddata = function() {
+                    // Replace image with video
+                    img.style.display = 'none';
+                    feed.insertBefore(newVideo, img);
+                    loading.classList.remove('active');
+                    
+                    // Update status
+                    statusText.textContent = 'Live';
+                    
+                    // Update both control buttons
+                    const regularControlBtn = feed.querySelector('.video-controls button');
+                    const fullscreenControlBtn = feed.querySelector('.fullscreen-controls button');
+                    
+                    [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                    <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'pauseLiveView');
+                            btn.setAttribute('title', 'Pause Live View');
+                        }
+                    });
+                };
+                
+                newVideo.play();
+            }
+        }
+
+        function pauseLiveView(button) {
+            const feed = button.closest('.camera-feed');
+            const video = feed.querySelector('.camera-video');
+            const img = feed.querySelector('.camera-media');
+            const statusText = feed.querySelector('.camera-status span');
+            
+            if (video) {
+                video.pause();
+                
+                // Get both regular and fullscreen control buttons
+                const regularControlBtn = feed.querySelector('.video-controls button');
+                const fullscreenControlBtn = feed.querySelector('.fullscreen-controls button');
+                
+                // If there's an image, show it and hide video
+                if (img) {
+                    video.remove();
+                    img.style.display = 'block';
+                    statusText.textContent = 'Snapshot';
+                } else {
+                    statusText.textContent = 'Paused';
+                }
+                
+                // Update both control buttons
+                [regularControlBtn, fullscreenControlBtn].forEach(btn => {
+                    if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                        const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                        btn.innerHTML = `
+                            <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                            </svg>
+                        `;
+                        btn.setAttribute('data-action', 'startLiveView');
+                        btn.setAttribute('title', 'Start Live View');
+                    }
+                });
+            }
+        }
+
+        // Handle video and image loading states with event delegation
+        document.addEventListener('loadstart', function(e) {
+            if (e.target.classList.contains('camera-video')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading) loading.classList.add('active');
+            }
+        }, true);
+        
+        document.addEventListener('loadeddata', function(e) {
+            if (e.target.classList.contains('camera-video')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading) loading.classList.remove('active');
+            }
+        }, true);
+        
+        document.addEventListener('error', function(e) {
+            if (e.target.classList.contains('camera-video')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading) loading.classList.remove('active');
+                
+                // Show error state
+                const placeholder = document.createElement('div');
+                placeholder.className = 'camera-placeholder';
+                placeholder.innerHTML = `
+                    <div style="text-align: center; color: var(--color-error-500);">
+                        <svg class="icon icon-lg" viewBox="0 0 24 24" style="margin-bottom: var(--spacing-2);">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8V12M12 16H12.01" />
+                        </svg>
+                        <p>Failed to load video</p>
+                    </div>
+                `;
+                e.target.style.display = 'none';
+                e.target.parentElement.appendChild(placeholder);
+            } else if (e.target.classList.contains('camera-media')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading) loading.classList.remove('active');
+                
+                e.target.style.display = 'none';
+                
+                // Show error placeholder
+                const placeholder = document.createElement('div');
+                placeholder.className = 'camera-placeholder';
+                placeholder.innerHTML = `
+                    <svg class="icon icon-lg" style="opacity: 0.15;" viewBox="0 0 24 24">
+                        <path d="M23 7L16 12L23 17V7Z" />
+                        <rect x="1" y="5" width="15" height="14" rx="2" />
+                    </svg>
+                `;
+                e.target.parentElement.appendChild(placeholder);
+            }
+        }, true);
+        
+        document.addEventListener('load', function(e) {
+            if (e.target.classList.contains('camera-media')) {
+                const loading = e.target.parentElement.querySelector('.camera-loading');
+                if (loading) loading.classList.remove('active');
+            }
+        }, true);
+
+        // Event delegation for video controls
+        document.addEventListener('click', function(e) {
+            // Handle fullscreen toggle
+            if (e.target.closest('[data-action="toggleFullscreen"]')) {
+                e.preventDefault();
+                toggleFullscreen(e.target);
+            }
+            
+            // Handle exit fullscreen
+            if (e.target.closest('[data-action="exitFullscreen"]')) {
+                e.preventDefault();
+                exitFullscreen(e.target);
+            }
+            
+            // Handle start live view
+            if (e.target.closest('[data-action="startLiveView"]')) {
+                e.preventDefault();
+                startLiveView(e.target);
+            }
+            
+            // Handle pause live view
+            if (e.target.closest('[data-action="pauseLiveView"]')) {
+                e.preventDefault();
+                pauseLiveView(e.target);
+            }
+            
+            // Handle remove camera
+            if (e.target.closest('[data-action="removeCamera"]')) {
+                e.preventDefault();
+                removeCamera(e.target);
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const fullscreenCard = document.querySelector('.camera-card.fullscreen');
+                if (fullscreenCard) {
+                    fullscreenCard.classList.remove('fullscreen');
+                    document.body.style.overflow = '';
+                    fullscreenCard.setAttribute('draggable', 'true');
+                }
+            }
+        });
+
+        // Updated streaming toggle to handle videos without autoplay
+        function toggleStreaming() {
+            const btn = document.getElementById('streamToggle');
+            const btnText = document.getElementById('streamText');
+            const btnIcon = document.getElementById('streamIcon');
+            const videos = document.querySelectorAll('.camera-video');
+            
+            isStreaming = !isStreaming;
+            
+            if (isStreaming) {
+                btnText.textContent = 'Stop All Streams';
+                btnIcon.innerHTML = '<rect x="5" y="5" width="10" height="10" fill="currentColor" stroke="none" rx="2" />';
+                btn.classList.add('streaming');
+                
+                // Play all videos and update their control buttons
+                videos.forEach(video => {
+                    video.play();
+                    const controlBtn = video.parentElement.querySelector('.video-controls button');
+                    const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button');
+                    
+                    [controlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <rect x="6" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                    <rect x="11" y="5" width="3" height="10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'pauseLiveView');
+                            btn.setAttribute('title', 'Pause Live View');
+                        }
+                    });
+                    
+                    // Update status to Live
+                    const statusText = video.parentElement.querySelector('.camera-status span');
+                    if (statusText) statusText.textContent = 'Live';
+                });
+            } else {
+                btnText.textContent = 'Start All Streams';
+                btnIcon.innerHTML = '<polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />';
+                btn.classList.remove('streaming');
+                
+                // Pause all videos and update their control buttons
+                videos.forEach(video => {
+                    video.pause();
+                    const controlBtn = video.parentElement.querySelector('.video-controls button');
+                    const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button');
+                    
+                    [controlBtn, fullscreenControlBtn].forEach(btn => {
+                        if (btn && btn.getAttribute('data-action') !== 'exitFullscreen' && btn.getAttribute('data-action') !== 'toggleFullscreen') {
+                            const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                            btn.innerHTML = `
+                                <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                    <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                                </svg>
+                            `;
+                            btn.setAttribute('data-action', 'startLiveView');
+                            btn.setAttribute('title', 'Start Live View');
+                        }
+                    });
+                    
+                    // Update status to Snapshot
+                    const statusText = video.parentElement.querySelector('.camera-status span');
+                    if (statusText) statusText.textContent = 'Snapshot';
+                });
+            }
+        }
+
+        // Updated Drag and Drop for Camera Cards
+        let draggedElement = null;
+
+        function initializeDragAndDrop() {
+            // Remove existing event listeners to avoid duplicates
+            document.querySelectorAll('.camera-card').forEach(card => {
+                // Clone the node to remove all event listeners
+                const newCard = card.cloneNode(true);
+                card.parentNode.replaceChild(newCard, card);
+            });
+            
+            // Add event listeners to all camera cards
+            document.querySelectorAll('.camera-card').forEach(card => {
+                card.addEventListener('dragstart', function(e) {
+                    // Don't allow dragging in fullscreen mode
+                    if (this.classList.contains('fullscreen')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    draggedElement = this;
+                    this.style.opacity = '0.5';
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/html', this.innerHTML);
+                });
+                
+                card.addEventListener('dragend', function(e) {
+                    this.style.opacity = '';
+                });
+                
+                card.addEventListener('dragover', function(e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                    e.dataTransfer.dropEffect = 'move';
+                    
+                    // Add visual feedback
+                    if (draggedElement !== this && !this.classList.contains('drag-over')) {
+                        this.style.transform = 'scale(0.95)';
+                        this.classList.add('drag-over');
+                    }
+                    
+                    return false;
+                });
+                
+                card.addEventListener('dragleave', function(e) {
+                    this.style.transform = '';
+                    this.classList.remove('drag-over');
+                });
+                
+                card.addEventListener('drop', function(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    }
+                    
+                    this.style.transform = '';
+                    this.classList.remove('drag-over');
+                    
+                    if (draggedElement !== this) {
+                        const parent = this.parentNode;
+                        const draggedIndex = Array.from(parent.children).indexOf(draggedElement);
+                        const targetIndex = Array.from(parent.children).indexOf(this);
+                        
+                        if (draggedIndex < targetIndex) {
+                            parent.insertBefore(draggedElement, this.nextSibling);
+                        } else {
+                            parent.insertBefore(draggedElement, this);
+                        }
+                        
+                        // Save the new order to localStorage
+                        saveCameraOrder();
+                    }
+                    
+                    return false;
+                });
+            });
+        }
+
+        // Updated save camera configuration
+        function saveCameraOrder() {
+            const cards = document.querySelectorAll('.camera-card');
+            const cameras = Array.from(cards).map(card => ({
+                id: card.dataset.cameraId,
+                project: card.dataset.project,
+                name: card.dataset.cameraName
+            }));
+            localStorage.setItem('activeCameras', JSON.stringify(cameras));
+        }
+
+        // Updated restore camera configuration
+        function restoreCameraOrder() {
+            const savedCameras = localStorage.getItem('activeCameras');
+            if (savedCameras) {
+                const cameras = JSON.parse(savedCameras);
+                const grid = document.getElementById('cameraGrid');
+                const addCard = grid.querySelector('.add-camera-card');
+                
+                // Remove existing camera cards (keep add card)
+                grid.querySelectorAll('.camera-card').forEach(card => card.remove());
+                
+                // Add cameras from saved configuration
+                cameras.forEach(savedCamera => {
+                    // Find camera data
+                    let cameraData = null;
+                    for (const [projectKey, project] of Object.entries(projectsData)) {
+                        const camera = project.cameras.find(c => c.id === savedCamera.id);
+                        if (camera) {
+                            cameraData = camera;
+                            break;
+                        }
+                    }
+                    
+                    if (cameraData) {
+                        const cameraCard = createCameraCard(cameraData);
+                        grid.insertBefore(cameraCard, addCard);
+                    }
+                });
+                
+                // Re-initialize drag and drop
+                initializeDragAndDrop();
+                
+                // Check if fit-to-screen should be applied
+                const savedFitToScreen = localStorage.getItem('fitToScreen');
+                if (savedFitToScreen === 'true') {
+                    adjustGridForFitToScreen();
+                }
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize drag and drop
+            initializeDragAndDrop();
+            
+            // Restore camera configuration
+            restoreCameraOrder();
+            
+            // Restore fit-to-screen state
+            const savedFitToScreen = localStorage.getItem('fitToScreen');
+            if (savedFitToScreen === 'true') {
+                const fitToggle = document.getElementById('fitToScreenToggle');
+                if (fitToggle) {
+                    fitToggle.classList.add('active');
+                    document.querySelector('.content-area').classList.add('fit-to-screen');
+                    adjustGridForFitToScreen();
+                }
+            }
+            
+            // Set initial alerts button state
+            const alertsPanel = document.getElementById('alertsPanel');
+            const alertsToggle = document.getElementById('alertsToggle');
+            if (!alertsPanel.classList.contains('collapsed')) {
+                alertsToggle.classList.add('active');
+            }
+            
+            // Update the initial video control buttons to show play state
+            document.querySelectorAll('.camera-video').forEach(video => {
+                const controlBtn = video.parentElement.querySelector('.video-controls button');
+                const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button');
+                
+                [controlBtn, fullscreenControlBtn].forEach(btn => {
+                    if (btn && btn.getAttribute('data-action') !== 'toggleFullscreen' && btn.getAttribute('data-action') !== 'exitFullscreen') {
+                        const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
+                        btn.innerHTML = `
+                            <svg class="icon ${iconSize}" viewBox="0 0 20 20">
+                                <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
+                            </svg>
+                        `;
+                        btn.setAttribute('data-action', 'startLiveView');
+                        btn.setAttribute('title', 'Start Live View');
+                    }
+                });
+                
+                // Update status to indicate not live
+                const statusText = video.parentElement.querySelector('.camera-status span');
+                if (statusText && statusText.textContent === 'Live') {
+                    statusText.textContent = 'Snapshot';
+                }
+            });
+            
+            // Collapse alerts panel on mobile by default
+            if (window.innerWidth <= 768) {
+                alertsPanel.classList.add('collapsed');
+                alertsToggle.classList.remove('active');
+            }
+        });
+
+        // Initialize on page load
+        initializeDragAndDrop();
+        restoreCameraOrder();
+    </script>
+</body>
+</html>
