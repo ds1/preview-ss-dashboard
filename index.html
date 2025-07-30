@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSDEV Dashboard - Preview Deployments</title>
+    <style>
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #0b0a09;
+            color: #f9f9f9;
+        }
+        h1 {
+            color: #f79837;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #939598;
+            margin-bottom: 3rem;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .preview-card {
+            background: #1a1918;
+            border: 1px solid #2a2827;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .preview-card:hover {
+            border-color: #f79837;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(247, 152, 55, 0.1);
+        }
+        .preview-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #f79837;
+        }
+        .preview-card p {
+            color: #bbbcbe;
+            margin: 0 0 1rem 0;
+            font-size: 0.875rem;
+        }
+        .preview-card a {
+            display: inline-block;
+            background: #f79837;
+            color: #1b0b03;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .preview-card a:hover {
+            background: #f07c22;
+        }
+        .main-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #00a8ad;
+            text-decoration: none;
+        }
+        .main-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>DSDEV Dashboard Previews</h1>
+    <p class="subtitle">Branch preview deployments for testing and development</p>
+    <a href="https://danschmitz.dev" class="main-link">← Back to main site</a>
+    
+    <div class="preview-grid">
+        <div class="preview-card">
+            <h3>fix-dropdown-narrow-viewport</h3>
+            <p>Fixes dropdown interaction issues on narrow viewports</p>
+            <a href="/fix-dropdown-narrow-viewport/">View Preview</a>
+        </div>
+        <!-- Add more preview cards as branches are deployed -->
+    </div>
+</body>
+</html>
