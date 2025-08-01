@@ -1619,13 +1619,13 @@ body.hide-timestamps .camera-details p:last-child {
     display: flex;
 }
 
-.empty-state .icon {
+/*.empty-state .icon {
     width: 64px;
     height: 64px;
     stroke-width: 1.5;
     opacity: 0.3;
     margin-bottom: var(--spacing-4);
-}
+}*/
 
 .empty-state h3 {
     font-size: 20px;

@@ -2,13 +2,14 @@
 // Camera Management Functions
 
 let selectedCameras = [];
-let currentProject = 'downtown-tower';
+let currentProject = null; // Will be set to first project alphabetically
 
 // Camera Management Functions
 function openCameraSelection() {
     const modal = document.getElementById('cameraSelectionModal');
     modal.classList.add('active');
     selectedCameras = [];
+    populateProjectsSidebar(); // Populate projects dynamically
     populateCamerasGrid(currentProject);
     updateAddButton();
     document.body.style.overflow = 'hidden';
@@ -18,6 +19,39 @@ function openCameraSelection() {
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
     }
+}
+
+function populateProjectsSidebar() {
+    const sidebar = document.querySelector('.projects-sidebar');
+    sidebar.innerHTML = '';
+    
+    // Get projects and sort alphabetically by name
+    const sortedProjects = Object.entries(projectsData).sort((a, b) => 
+        a[1].name.localeCompare(b[1].name)
+    );
+    
+    // Create project items
+    sortedProjects.forEach(([projectId, project], index) => {
+        const projectItem = document.createElement('div');
+        projectItem.className = 'project-item';
+        projectItem.dataset.project = projectId;
+        
+        // Set first project as active if current project not set
+        if (index === 0 && !currentProject) {
+            currentProject = projectId;
+        }
+        
+        if (projectId === currentProject) {
+            projectItem.classList.add('active');
+        }
+        
+        projectItem.innerHTML = `
+            <div class="project-name">${project.name}</div>
+            <div class="project-cameras-count">${project.cameras.length} cameras</div>
+        `;
+        
+        sidebar.appendChild(projectItem);
+    });
 }
 
 function closeCameraSelection() {
@@ -46,9 +80,14 @@ function populateCamerasGrid(projectId) {
     
     grid.innerHTML = '';
     
-    project.cameras.forEach(camera => {
+    // Sort cameras alphabetically by name
+    const sortedCameras = [...project.cameras].sort((a, b) => 
+        a.name.localeCompare(b.name)
+    );
+    
+    sortedCameras.forEach(camera => {
         const isAdded = addedCameraIds.includes(camera.id);
-        const isDisabled = camera.status === 'maintenance' || camera.status === 'offline';
+        const isDisabled = camera.status === 'maintenance'; // Only maintenance cameras are disabled
         
         const cameraOption = document.createElement('div');
         cameraOption.className = `camera-option ${isAdded ? 'disabled' : ''} ${isDisabled ? 'disabled' : ''}`;
