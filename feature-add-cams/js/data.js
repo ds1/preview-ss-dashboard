@@ -9,8 +9,7 @@ const projectsData = {
             { id: 'dt-004', name: 'South Gate', status: 'online', battery: 78, type: 'video' },
             { id: 'dt-005', name: 'Parking Area', status: 'online', battery: 65, type: 'image' },
             { id: 'dt-006', name: 'Main Lobby', status: 'online', battery: 88, type: 'video' },
-            { id: 'dt-007', name: 'Elevator Bank', status: 'maintenance', battery: 45, type: 'image' },
-            { id: 'dt-008', name: 'Roof Access', status: 'online', battery: 72, type: 'video' }
+            { id: 'dt-007', name: 'Roof Access', status: 'online', battery: 72, type: 'video' }
         ]
     },
     'riverside-complex': {
@@ -23,7 +22,7 @@ const projectsData = {
             { id: 'rc-005', name: 'Access Road', status: 'online', battery: 91, type: 'video' },
             { id: 'rc-006', name: 'Worker Entrance', status: 'online', battery: 74, type: 'image' },
             { id: 'rc-007', name: 'Concrete Plant', status: 'online', battery: 82, type: 'video' },
-            { id: 'rc-008', name: 'Dock Area', status: 'maintenance', battery: 34, type: 'image' },
+            { id: 'rc-008', name: 'Dock Area', status: 'offline', battery: 34, type: 'image' },
             { id: 'rc-009', name: 'Security Gate', status: 'online', battery: 95, type: 'video' },
             { id: 'rc-010', name: 'Equipment Yard', status: 'online', battery: 61, type: 'image' },
             { id: 'rc-011', name: 'Building A Site', status: 'online', battery: 79, type: 'video' },
@@ -40,7 +39,7 @@ const projectsData = {
             { id: 'ipb-005', name: 'Loading Bay B', status: 'online', battery: 69, type: 'video' },
             { id: 'ipb-006', name: 'Admin Building', status: 'online', battery: 91, type: 'image' },
             { id: 'ipb-007', name: 'Parking Lot 1', status: 'online', battery: 58, type: 'video' },
-            { id: 'ipb-008', name: 'Parking Lot 2', status: 'maintenance', battery: 42, type: 'image' },
+            { id: 'ipb-008', name: 'Parking Lot 2', status: 'offline', battery: 42, type: 'image' },
             { id: 'ipb-009', name: 'Security Office', status: 'online', battery: 87, type: 'video' },
             { id: 'ipb-010', name: 'Fire Station', status: 'online', battery: 76, type: 'image' },
             { id: 'ipb-011', name: 'Power Substation', status: 'online', battery: 94, type: 'video' },
@@ -56,7 +55,7 @@ const projectsData = {
             { id: 'ms-001', name: 'Platform A', status: 'online', battery: 89, type: 'video' },
             { id: 'ms-002', name: 'Platform B', status: 'online', battery: 76, type: 'video' },
             { id: 'ms-003', name: 'Concourse', status: 'online', battery: 92, type: 'image' },
-            { id: 'ms-004', name: 'Escalator Area', status: 'maintenance', battery: 38, type: 'video' },
+            { id: 'ms-004', name: 'Escalator Area', status: 'offline', battery: 38, type: 'video' },
             { id: 'ms-005', name: 'Ticket Hall', status: 'online', battery: 85, type: 'image' },
             { id: 'ms-006', name: 'Emergency Exit', status: 'online', battery: 71, type: 'video' }
         ]
@@ -71,7 +70,7 @@ const projectsData = {
             { id: 'hd-005', name: 'Boat Ramp', status: 'online', battery: 63, type: 'video' },
             { id: 'hd-006', name: 'Parking Area', status: 'online', battery: 88, type: 'image' },
             { id: 'hd-007', name: 'Restaurant Deck', status: 'online', battery: 79, type: 'video' },
-            { id: 'hd-008', name: 'Lighthouse', status: 'maintenance', battery: 51, type: 'image' },
+            { id: 'hd-008', name: 'Lighthouse', status: 'offline', battery: 51, type: 'image' },
             { id: 'hd-009', name: 'Breakwater', status: 'online', battery: 67, type: 'video' },
             { id: 'hd-010', name: 'Harbor Master', status: 'online', battery: 90, type: 'image' }
         ]
