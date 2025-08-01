@@ -3,25 +3,13 @@
 
 let selectedCameras = [];
 let currentProject = 'downtown-tower';
-let selectedProjects = new Set(); // Track selected projects
 
-// Enhanced Camera Management Functions
+// Camera Management Functions
 function openCameraSelection() {
     const modal = document.getElementById('cameraSelectionModal');
     modal.classList.add('active');
     selectedCameras = [];
-    selectedProjects.clear();
-    
-    // Reset all checkboxes
-    document.querySelectorAll('.project-checkbox').forEach(cb => {
-        cb.checked = false;
-        cb.indeterminate = false;
-    });
-    
-    // Clear camera container
-    document.getElementById('availableCamerasContainer').innerHTML = '';
-    
-    updateSelectionSummary();
+    populateCamerasGrid(currentProject);
     updateAddButton();
     document.body.style.overflow = 'hidden';
     
@@ -36,7 +24,6 @@ function closeCameraSelection() {
     const modal = document.getElementById('cameraSelectionModal');
     modal.classList.remove('active');
     selectedCameras = [];
-    selectedProjects.clear();
     document.body.style.overflow = '';
     
     // Reset iOS scroll prevention
@@ -46,215 +33,6 @@ function closeCameraSelection() {
     }
 }
 
-// New function to handle project checkbox changes
-function toggleProjectSelection(projectId) {
-    const checkbox = document.querySelector(`.project-checkbox[data-project="${projectId}"]`);
-    const projectItem = checkbox.closest('.project-item');
-    
-    if (checkbox.checked) {
-        selectedProjects.add(projectId);
-        projectItem.classList.add('viewing');
-        showProjectCameras(projectId);
-    } else {
-        selectedProjects.delete(projectId);
-        projectItem.classList.remove('viewing');
-        hideProjectCameras(projectId);
-        // Remove any selected cameras from this project
-        selectedCameras = selectedCameras.filter(cam => {
-            const project = Object.entries(projectsData).find(([key, proj]) => 
-                proj.cameras.some(c => c.id === cam.id)
-            );
-            return project && project[0] !== projectId;
-        });
-    }
-    
-    updateProjectCheckboxState(projectId);
-    updateSelectionSummary();
-    updateAddButton();
-}
-
-// Show cameras for a selected project
-function showProjectCameras(projectId) {
-    const container = document.getElementById('availableCamerasContainer');
-    const project = projectsData[projectId];
-    
-    if (!project) return;
-    
-    // Check if section already exists
-    let section = container.querySelector(`[data-project-section="${projectId}"]`);
-    if (section) return;
-    
-    // Create new section
-    section = document.createElement('div');
-    section.className = 'project-section';
-    section.dataset.projectSection = projectId;
-    
-    // Get currently added camera IDs
-    const addedCameraIds = Array.from(document.querySelectorAll('.camera-card')).map(card => 
-        card.dataset.cameraId
-    );
-    
-    section.innerHTML = `
-        <div class="project-section-header">
-            <h3>${project.name}</h3>
-            <button class="btn-link" data-action="selectAllProjectCameras" data-project="${projectId}">
-                Select All (${project.cameras.length})
-            </button>
-        </div>
-        <div class="cameras-grid" data-project-grid="${projectId}">
-            ${project.cameras.map(camera => {
-                const isAdded = addedCameraIds.includes(camera.id);
-                const isDisabled = camera.status === 'maintenance' || camera.status === 'offline';
-                const isSelected = selectedCameras.some(c => c.id === camera.id);
-                
-                return `
-                    <div class="camera-option ${isAdded ? 'disabled' : ''} ${isDisabled ? 'disabled' : ''} ${isSelected ? 'selected' : ''}" 
-                         data-camera-id="${camera.id}"
-                         data-project="${projectId}">
-                        <div class="camera-option-icon">
-                            <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                ${camera.type === 'video' ? 
-                                    '<path d="M23 7L16 12L23 17V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/>' :
-                                    '<rect x="3" y="3" width="14" height="14" rx="2"/><circle cx="10" cy="10" r="3"/><path d="M21 15L15.5 9.5L10 15"/>'
-                                }
-                            </svg>
-                        </div>
-                        <div class="camera-option-name">${camera.name}</div>
-                        <div class="camera-option-status">
-                            ${isAdded ? 'Already added' : camera.status === 'online' ? 'Online' : camera.status.charAt(0).toUpperCase() + camera.status.slice(1)}
-                            ${camera.status === 'online' ? ` • ${camera.battery}%` : ''}
-                        </div>
-                    </div>
-                `;
-            }).join('')}
-        </div>
-    `;
-    
-    container.appendChild(section);
-    
-    // Add click handlers to camera options
-    section.querySelectorAll('.camera-option:not(.disabled)').forEach(option => {
-        option.addEventListener('click', function() {
-            const cameraId = this.dataset.cameraId;
-            const camera = project.cameras.find(c => c.id === cameraId);
-            if (camera) {
-                toggleCameraSelection(camera, projectId);
-            }
-        });
-    });
-}
-
-// Hide cameras for a deselected project
-function hideProjectCameras(projectId) {
-    const section = document.querySelector(`[data-project-section="${projectId}"]`);
-    if (section) {
-        section.remove();
-    }
-}
-
-// Enhanced camera selection toggle
-function toggleCameraSelection(camera, projectId) {
-    const index = selectedCameras.findIndex(c => c.id === camera.id);
-    const cameraOption = document.querySelector(`[data-camera-id="${camera.id}"]`);
-    
-    if (index > -1) {
-        selectedCameras.splice(index, 1);
-        cameraOption.classList.remove('selected');
-    } else {
-        selectedCameras.push(camera);
-        cameraOption.classList.add('selected');
-    }
-    
-    updateProjectCheckboxState(projectId);
-    updateSelectionSummary();
-    updateAddButton();
-}
-
-// Update project checkbox state based on camera selections
-function updateProjectCheckboxState(projectId) {
-    const project = projectsData[projectId];
-    const checkbox = document.querySelector(`.project-checkbox[data-project="${projectId}"]`);
-    
-    if (!project || !checkbox) return;
-    
-    const projectCameras = project.cameras.filter(cam => 
-        cam.status === 'online' && !isAlreadyAdded(cam.id)
-    );
-    const selectedProjectCameras = selectedCameras.filter(cam => 
-        project.cameras.some(pc => pc.id === cam.id)
-    );
-    
-    if (selectedProjectCameras.length === 0) {
-        checkbox.checked = false;
-        checkbox.indeterminate = false;
-    } else if (selectedProjectCameras.length === projectCameras.length) {
-        checkbox.checked = true;
-        checkbox.indeterminate = false;
-    } else {
-        checkbox.checked = false;
-        checkbox.indeterminate = true;
-    }
-}
-
-// Select all cameras from a project
-function selectAllProjectCameras(projectId) {
-    const project = projectsData[projectId];
-    if (!project) return;
-    
-    const addedCameraIds = Array.from(document.querySelectorAll('.camera-card')).map(card => 
-        card.dataset.cameraId
-    );
-    
-    project.cameras.forEach(camera => {
-        if (camera.status === 'online' && !addedCameraIds.includes(camera.id)) {
-            const existingIndex = selectedCameras.findIndex(c => c.id === camera.id);
-            if (existingIndex === -1) {
-                selectedCameras.push(camera);
-            }
-        }
-    });
-    
-    // Update UI
-    document.querySelectorAll(`[data-project-grid="${projectId}"] .camera-option:not(.disabled)`).forEach(option => {
-        option.classList.add('selected');
-    });
-    
-    updateProjectCheckboxState(projectId);
-    updateSelectionSummary();
-    updateAddButton();
-}
-
-// Select all projects and their cameras
-function selectAllProjects() {
-    Object.keys(projectsData).forEach(projectId => {
-        const checkbox = document.querySelector(`.project-checkbox[data-project="${projectId}"]`);
-        if (checkbox && !checkbox.checked) {
-            checkbox.checked = true;
-            selectedProjects.add(projectId);
-            document.querySelector(`.project-item[data-project="${projectId}"]`).classList.add('viewing');
-            showProjectCameras(projectId);
-        }
-        selectAllProjectCameras(projectId);
-    });
-}
-
-// Update selection summary
-function updateSelectionSummary() {
-    const summary = document.getElementById('selectionSummary');
-    const projectCount = selectedProjects.size;
-    const cameraCount = selectedCameras.length;
-    
-    summary.textContent = `${projectCount} project${projectCount !== 1 ? 's' : ''}, ${cameraCount} camera${cameraCount !== 1 ? 's' : ''} selected`;
-}
-
-// Check if camera is already added
-function isAlreadyAdded(cameraId) {
-    return Array.from(document.querySelectorAll('.camera-card')).some(card => 
-        card.dataset.cameraId === cameraId
-    );
-}
-
-// Original functions below remain unchanged
 function populateCamerasGrid(projectId) {
     const grid = document.getElementById('availableCamerasGrid');
     const project = projectsData[projectId];
@@ -298,6 +76,21 @@ function populateCamerasGrid(projectId) {
         
         grid.appendChild(cameraOption);
     });
+}
+
+function toggleCameraSelection(camera) {
+    const index = selectedCameras.findIndex(c => c.id === camera.id);
+    const cameraOption = document.querySelector(`[data-camera-id="${camera.id}"]`);
+    
+    if (index > -1) {
+        selectedCameras.splice(index, 1);
+        cameraOption.classList.remove('selected');
+    } else {
+        selectedCameras.push(camera);
+        cameraOption.classList.add('selected');
+    }
+    
+    updateAddButton();
 }
 
 function updateAddButton() {

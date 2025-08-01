@@ -1,4 +1,3 @@
-<!-- index.html v1.1.0 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -429,62 +428,31 @@
             
             <div class="modal-content">
                 <div class="projects-sidebar">
-                    <!-- Global controls at top -->
-                    <div class="global-project-controls">
-                        <button class="btn-link" id="selectAllProjectsBtn">Select All Projects</button>
-                        <span class="selection-summary" id="selectionSummary">0 projects, 0 cameras selected</span>
+                    <div class="project-item active" data-project="downtown-tower">
+                        <div class="project-name">Downtown Tower</div>
+                        <div class="project-cameras-count">8 cameras</div>
                     </div>
-                    
-                    <!-- Enhanced project items -->
-                    <div class="project-item" data-project="downtown-tower">
-                        <input type="checkbox" class="project-checkbox" id="project-dt" data-project="downtown-tower">
-                        <div class="project-content" data-project="downtown-tower">
-                            <div class="project-name">Downtown Tower</div>
-                            <div class="project-cameras-count">8 cameras</div>
-                        </div>
-                        <button class="project-select-all" data-project="downtown-tower">All</button>
-                    </div>
-                    
                     <div class="project-item" data-project="riverside-complex">
-                        <input type="checkbox" class="project-checkbox" id="project-rc" data-project="riverside-complex">
-                        <div class="project-content" data-project="riverside-complex">
-                            <div class="project-name">Riverside Complex</div>
-                            <div class="project-cameras-count">12 cameras</div>
-                        </div>
-                        <button class="project-select-all" data-project="riverside-complex">All</button>
+                        <div class="project-name">Riverside Complex</div>
+                        <div class="project-cameras-count">12 cameras</div>
                     </div>
-                    
                     <div class="project-item" data-project="industrial-park-b">
-                        <input type="checkbox" class="project-checkbox" id="project-ipb" data-project="industrial-park-b">
-                        <div class="project-content" data-project="industrial-park-b">
-                            <div class="project-name">Industrial Park B</div>
-                            <div class="project-cameras-count">15 cameras</div>
-                        </div>
-                        <button class="project-select-all" data-project="industrial-park-b">All</button>
+                        <div class="project-name">Industrial Park B</div>
+                        <div class="project-cameras-count">15 cameras</div>
                     </div>
-                    
                     <div class="project-item" data-project="metro-station">
-                        <input type="checkbox" class="project-checkbox" id="project-ms" data-project="metro-station">
-                        <div class="project-content" data-project="metro-station">
-                            <div class="project-name">Metro Station</div>
-                            <div class="project-cameras-count">6 cameras</div>
-                        </div>
-                        <button class="project-select-all" data-project="metro-station">All</button>
+                        <div class="project-name">Metro Station</div>
+                        <div class="project-cameras-count">6 cameras</div>
                     </div>
-                    
                     <div class="project-item" data-project="harbor-development">
-                        <input type="checkbox" class="project-checkbox" id="project-hd" data-project="harbor-development">
-                        <div class="project-content" data-project="harbor-development">
-                            <div class="project-name">Harbor Development</div>
-                            <div class="project-cameras-count">10 cameras</div>
-                        </div>
-                        <button class="project-select-all" data-project="harbor-development">All</button>
+                        <div class="project-name">Harbor Development</div>
+                        <div class="project-cameras-count">10 cameras</div>
                     </div>
                 </div>
                 
                 <div class="cameras-grid-container">
-                    <div id="availableCamerasContainer">
-                        <!-- Project sections with cameras will be dynamically populated here -->
+                    <div class="cameras-grid" id="availableCamerasGrid">
+                        <!-- Cameras will be populated here -->
                     </div>
                 </div>
             </div>

@@ -56,12 +56,6 @@ document.addEventListener('click', function(e) {
             e.preventDefault();
             addSelectedCameras();
             break;
-            
-        case 'selectAllProjectCameras':
-            e.preventDefault();
-            const projectId = actionElement.dataset.project;
-            selectAllProjectCameras(projectId);
-            break;
     }
 });
 
@@ -71,50 +65,20 @@ document.getElementById('streamToggle').addEventListener('click', function(e) {
     toggleStreaming();
 });
 
-// Enhanced Project Selection Event Handlers
+// Project Selection
 document.addEventListener('click', function(e) {
-    // Handle project checkbox changes
-    if (e.target.classList.contains('project-checkbox')) {
-        const projectId = e.target.dataset.project;
-        toggleProjectSelection(projectId);
-        return;
-    }
-    
-    // Handle project content click (show/hide cameras without selection)
-    if (e.target.closest('.project-content')) {
-        const projectContent = e.target.closest('.project-content');
-        const projectId = projectContent.dataset.project;
-        const checkbox = document.querySelector(`.project-checkbox[data-project="${projectId}"]`);
+    if (e.target.closest('.project-item')) {
+        const projectItem = e.target.closest('.project-item');
         
-        // Only toggle visibility if checkbox is not checked
-        if (!checkbox.checked) {
-            checkbox.checked = true;
-            toggleProjectSelection(projectId);
-        }
-        return;
-    }
-    
-    // Handle "All" button for individual projects
-    if (e.target.classList.contains('project-select-all')) {
-        e.preventDefault();
-        const projectId = e.target.dataset.project;
-        const checkbox = document.querySelector(`.project-checkbox[data-project="${projectId}"]`);
+        // Update active state
+        document.querySelectorAll('.project-item').forEach(p => p.classList.remove('active'));
+        projectItem.classList.add('active');
         
-        // Ensure project is selected first
-        if (!checkbox.checked) {
-            checkbox.checked = true;
-            toggleProjectSelection(projectId);
-        }
-        
-        selectAllProjectCameras(projectId);
-        return;
-    }
-    
-    // Handle "Select All Projects" button
-    if (e.target.id === 'selectAllProjectsBtn') {
-        e.preventDefault();
-        selectAllProjects();
-        return;
+        // Update current project and populate cameras
+        currentProject = projectItem.dataset.project;
+        selectedCameras = [];
+        populateCamerasGrid(currentProject);
+        updateAddButton();
     }
 });
 
@@ -127,7 +91,6 @@ document.getElementById('cameraSelectionModal').addEventListener('click', functi
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
-    // Handle Escape key
     if (e.key === 'Escape') {
         // Close fullscreen
         const fullscreenCard = document.querySelector('.camera-card.fullscreen');
@@ -147,15 +110,6 @@ document.addEventListener('keydown', function(e) {
         const modal = document.getElementById('cameraSelectionModal');
         if (modal.classList.contains('active')) {
             closeCameraSelection();
-        }
-    }
-    
-    // Handle Ctrl/Cmd + A for camera selection modal
-    const modal = document.getElementById('cameraSelectionModal');
-    if (modal.classList.contains('active')) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-            e.preventDefault();
-            selectAllProjects();
         }
     }
 });

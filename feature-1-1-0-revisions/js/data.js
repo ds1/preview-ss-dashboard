@@ -1,4 +1,3 @@
-// js/data.js
 // Projects and Camera Data
 const projectsData = {
     'downtown-tower': {

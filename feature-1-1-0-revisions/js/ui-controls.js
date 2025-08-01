@@ -1,4 +1,3 @@
-// js/ui-controls.js
 // UI Control Functions
 
 // Theme Toggle
