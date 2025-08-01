@@ -1,5 +1,5 @@
 // js/main.js
-// Main Application File
+// Main Application File - Empty Dashboard Start
 
 // Event delegation for all button actions
 document.addEventListener('click', function(e) {
@@ -189,10 +189,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Setup dropdown event handlers
     setupDropdownEventHandlers();
     
-    // Initialize drag and drop
+    // Initialize drag and drop (will be re-initialized when cameras are added)
     initializeDragAndDrop();
     
-    // Restore camera configuration
+    // Restore camera configuration from localStorage
     restoreCameraOrder();
     
     // Restore fit-to-screen state
@@ -227,31 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const toggle = document.getElementById('showTimestampsToggle');
         if (toggle) toggle.classList.remove('active');
     }
-    
-    // Update the initial video control buttons to show play state
-    document.querySelectorAll('.camera-video').forEach(video => {
-        const controlBtn = video.parentElement.querySelector('.video-controls button[data-action="startLiveView"]');
-        const fullscreenControlBtn = video.parentElement.querySelector('.fullscreen-controls button[data-action="startLiveView"]');
-        
-        [controlBtn, fullscreenControlBtn].forEach(btn => {
-            if (btn) {
-                const iconSize = btn.classList.contains('fullscreen-control-btn') ? '' : 'icon-sm';
-                btn.innerHTML = `
-                    <svg class="icon ${iconSize}" viewBox="0 0 20 20">
-                        <polygon points="7,5 7,15 15,10" fill="currentColor" stroke="none" />
-                    </svg>
-                `;
-                btn.setAttribute('data-action', 'startLiveView');
-                btn.setAttribute('title', 'Start Live View');
-            }
-        });
-        
-        // Update status to indicate not live
-        const statusText = video.parentElement.querySelector('.camera-status span');
-        if (statusText && statusText.textContent === 'Live') {
-            statusText.textContent = 'Video • Paused';
-        }
-    });
     
     // Update timestamps every second
     setInterval(updateTimestamps, 1000);
